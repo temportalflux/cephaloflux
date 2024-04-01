@@ -1,0 +1,176 @@
+default_profile "tesseract"
+active_profile "surface"
+profile "surface" {
+	size 1720 800
+	scale 0.5
+	location {
+		anchor "BottomLeft"
+		offset 0 90
+	}
+}
+profile "tesseract" {
+	size 740 300
+	location {
+		anchor "BottomLeft"
+		offset 0 40
+	}
+}
+layout {
+	default_layer "main"
+	switch "0" 210.0 90.0
+	switch "1" -330.0 90.0
+	switch "2" -270.0 90.0
+	switch "3" -210.0 90.0
+	switch "4" -150.0 90.0
+	switch "5" -90.0 90.0
+	switch "6" -30.0 90.0
+	switch "7" 30.0 90.0
+	switch "8" 90.0 90.0
+	switch "9" 150.0 90.0
+	switch "a" -300.0 -30.0
+	switch "arrow_d" 240.0 -150.0
+	switch "arrow_l" 120.0 -150.0
+	switch "arrow_r" 300.0 -150.0
+	switch "arrow_u" 180.0 -150.0
+	switch "b" -30.0 -90.0
+	switch "back" 390.0 90.0
+	switch "bracel" 270.0 30.0
+	switch "bracer" 330.0 30.0
+	switch "c" -150.0 -90.0
+	switch "caps" -360.0 -30.0
+	switch "comma" 150.0 -90.0
+	switch "ctrl" -240.0 -150.0
+	switch "d" -180.0 -30.0
+	switch "delete" 390.0 150.0
+	switch "e" -210.0 30.0
+	switch "enter" 360.0 -30.0
+	switch "equals" 330.0 90.0
+	switch "escape" -390.0 150.0
+	switch "f" -120.0 -30.0
+	switch "fn" -180.0 -150.0
+	switch "fn1" -330.0 150.0
+	switch "fn10" 210.0 150.0
+	switch "fn11" 270.0 150.0
+	switch "fn12" 330.0 150.0
+	switch "fn2" -270.0 150.0
+	switch "fn3" -210.0 150.0
+	switch "fn4" -150.0 150.0
+	switch "fn5" -90.0 150.0
+	switch "fn6" -30.0 150.0
+	switch "fn7" 30.0 150.0
+	switch "fn8" 90.0 150.0
+	switch "fn9" 150.0 150.0
+	switch "g" -60.0 -30.0
+	switch "h" 0.0 -30.0
+	switch "i" 90.0 30.0
+	switch "j" 60.0 -30.0
+	switch "k" 120.0 -30.0
+	switch "l" 180.0 -30.0
+	switch "lalt" -60.0 -150.0
+	switch "lshift" -330.0 -90.0
+	switch "m" 90.0 -90.0
+	switch "minus" 270.0 90.0
+	switch "n" 30.0 -90.0
+	switch "o" 150.0 30.0
+	switch "p" 210.0 30.0
+	switch "period" 210.0 -90.0
+	switch "pipe" 390.0 30.0
+	switch "platform" -120.0 -150.0
+	switch "q" -330.0 30.0
+	switch "quote" 300.0 -30.0
+	switch "r" -150.0 30.0
+	switch "ralt" 60.0 -150.0
+	switch "rshift" 330.0 -90.0
+	switch "s" -240.0 -30.0
+	switch "semi" 240.0 -30.0
+	switch "slash" 270.0 -90.0
+	switch "space" 0.0 -150.0
+	switch "t" -90.0 30.0
+	switch "tab" -390.0 30.0
+	switch "tilde" -390.0 90.0
+	switch "u" 30.0 30.0
+	switch "v" -90.0 -90.0
+	switch "w" -270.0 30.0
+	switch "x" -210.0 -90.0
+	switch "y" -30.0 30.0
+	switch "z" -270.0 -90.0
+	layer "main" {
+		bind "0" "0"
+		bind "1" "1"
+		bind "2" "2"
+		bind "3" "3"
+		bind "4" "4"
+		bind "5" "5"
+		bind "6" "6"
+		bind "7" "7"
+		bind "8" "8"
+		bind "9" "9"
+		bind "a" "a"
+		bind "arrow_d" "arrow_down"
+		bind "arrow_l" "arrow_left"
+		bind "arrow_r" "arrow_right"
+		bind "arrow_u" "arrow_up"
+		bind "b" "b"
+		bind "back" "backspace"
+		bind "bracel" "brace_open"
+		bind "bracer" "brace_close"
+		bind "c" "c"
+		bind "caps" "capslock"
+		bind "comma" "comma"
+		bind "ctrl" "ctrl"
+		bind "d" "d"
+		bind "delete" "delete"
+		bind "e" "e"
+		bind "enter" "enter"
+		bind "equals" "equals"
+		bind "escape" "escape"
+		bind "f" "f"
+		bind "fn" "function"
+		bind "fn1" "f1"
+		bind "fn10" "f10"
+		bind "fn11" "f11"
+		bind "fn12" "f12"
+		bind "fn2" "f2"
+		bind "fn3" "f3"
+		bind "fn4" "f4"
+		bind "fn5" "f5"
+		bind "fn6" "f6"
+		bind "fn7" "f7"
+		bind "fn8" "f8"
+		bind "fn9" "f9"
+		bind "g" "g"
+		bind "h" "h"
+		bind "i" "i"
+		bind "j" "j"
+		bind "k" "k"
+		bind "l" "l"
+		bind "lalt" "alt"
+		bind "lshift" "shift"
+		bind "m" "m"
+		bind "minus" "minus"
+		bind "n" "n"
+		bind "o" "o"
+		bind "p" "p"
+		bind "period" "period"
+		bind "pipe" "slash_back"
+		bind "platform" "win"
+		bind "q" "q"
+		bind "quote" "quote_single"
+		bind "r" "r"
+		bind "ralt" "alt"
+		bind "rshift" "shift"
+		bind "s" "s"
+		bind "semi" "semicolon"
+		bind "slash" "slash_forward"
+		bind "space" "space"
+		bind "t" "t"
+		bind "tab" "tab"
+		bind "tilde" "tilde"
+		bind "u" "u"
+		bind "v" "v"
+		bind "w" "w"
+		bind "x" "x"
+		bind "y" "y"
+		bind "z" "z"
+	}
+}
