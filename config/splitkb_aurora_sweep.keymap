@@ -173,7 +173,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
                                            |         |  LAYER  ||||       |   `   |
             */
             bindings = <
-                &kp QUOTE &kp LT   &kp GT   &kp DQT   &kp DOT  /**/ &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp PERCENT
+                &kp SQT   &kp LT   &kp GT   &kp DQT   &kp DOT  /**/ &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp PERCENT
                 &kp DOT   &kp MIUS &kp PLUS &kp EQUAL &kp HASH /**/ &kp PIPE  &kp SEMI   &kp LPAR &kp RPAR &kp QMARK
                 &kp CARET &kp FSLH &kp BSLH &kp BSLH  &none    /**/ &kp TILDE &kp DOLLAR &kp RBRC &kp RBRC &kp AT
                                             &none     &none    /**/ &none     &kp GRAVE
