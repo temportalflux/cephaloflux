@@ -1,102 +1,206 @@
-/*
- * Copyright (c) 2022 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
 #include <behaviors.dtsi>
+// Key Macros
 #include <dt-bindings/zmk/keys.h>
+// Behavior Macros
 #include <dt-bindings/zmk/bt.h>
+// Underglow Macros
+#include <dt-bindings/zmk/rgb.h>
+// Backlight Macros
+#include <dt-bindings/zmk/backlight.h>
 
+/*
+Codes (https://zmk.dev/docs/codes)
+Behaviors (https://zmk.dev/docs/behaviors)
+    Keys
+        `&kp <ID>` Key Press
+        `&mt <ID1> <ID2>` Mod Tap
+            Tap to send ID2, Hold to send ID1
+        `&kt <ID>` Key Toggle
+            e.g. `&kt LA(TAB)` would toggle TAB by sending ALT+TAB
+        `&sk <ID>` Sticky Key
+            e.g. `&sk LSHIFT` stick SHIFT until another key is pressed
+            note: this releases the layer when another key is pressed (not released)
+        `&gresc` Grave Escape; sends ` (grave accent) if shift or GUI is held, otherwise sends ESCAPE
+        `&caps_word` Capitalizes any input sent until the word is finished (anything thats not alphanumeric, underscore, backspace, or delete)
+        `&key_repeat` Key Repeat (sends the last input again)
+   
+    Misc
+        `&trans` Transparent, pass input to next layer down
+        `&none` None, consume input w/o sending anything
+    
+    Layers
+        `&mo <NUM>` Momentary Layer, enables a layer while the key is held
+        `&lt <NUM> <ID>` Layer Tap, enables a layer while held and sends a key `ID` when tapped
+        `&to <NUM>` To Layer, enables a specific layer and disables all other layers except default
+        `&tog <NUM>` Toggle Layer, enables a layer until it is explicitly disabled
+        `&sl <NUM>` Sticky Layer, keep a layer active until another key is pressed
+            note: this releases the layer when another key is released (not pressed)
+    
+    Mouse
+        `&mkp <MOUSE_BTN>` Mouse Button Press, emulates a mouse button
+            MOUSE_BTN can be: MB1/LCLK (Left Click), MB2/RCLK (Right Click), MB3/MCLK (Middle Click), MB4 (Mouse Button 4), MB5 (Mouse Button 5)
+    
+    Resetting
+        `&sys_reset` Reset, clears keyboard and loads from firmware
+        `&bootloader` Bootloader, resets the keyboard and activates bootloader mode to receive firmware
+    
+    Output Selection
+        `&bt <OP> [arg]` Bluetooth, performs a bluetooth operation
+            `&bt BT_CLR` clears the paired host on current profile
+            `&bt BT_NXT` selects the next profile
+            `&bt BT_PRV` selects the previous profile
+            `&bt BT_SEL <num>` selects a specific profile using 0-indexed id
+            ZMK support bluetooth “profiles” which allows connection to multiple devices (5 by default). Each profile stores the bluetooth MAC address of a peer, which can be empty if a profile has not been paired with a device yet.
+        `&out <OP>` Select Output, OUT_USB (usb cable), OUT_BLE (bluetooth), or OUT_TOG (toggling between the options)
 
-&mt {
-  //  flavor = "tap-preferred";
-   // tapping-term-ms = <200>;
-};
+    Lighting (https://zmk.dev/docs/behaviors/underglow, https://zmk.dev/docs/behaviors/backlight)
+        `&rgb_ug <OP> [arg]` Underglow RGB controls
+        `&bl <OP> [arg]` Backlight controls
+
+    Power Management
+        `&ext_power <EP_OFF/EP_ON,EP_TOG>` External power controls (like disabling LEDs)
+        `&soft_off` Turns off the keyboard
+*/
+
+// Inspirations:
+// Colemak Mod-DH https://colemakmods.github.io/mod-dh/
+// Phonty https://www.reddit.com/r/ErgoMechKeyboards/comments/sbbgxp/pnohty_12_update/
+// Chordic https://www.reddit.com/r/crkbd/comments/us6ucr/chordic_keyboard_layout_for_the_cornecrkbd/
+// Getreuer Symbols https://getreuer.info/posts/keyboards/symbol-layer/index.html
+
+#define DEFAULT 0
+#define ALPHA 0
+#define NUM 1
+#define SYM 2
+#define NAV 3
+
+/* TODO
+    Num & Scroll Lock; not present
+*/
 
 / {
 
+    /* LAYOUT
+    00:pinky1.L 01:ring1.L 02:middle1.L 03:indexB1.L 04:indexA1.L | 05:indexA1.R 06:indexB1.R 07:middle1.R 08:ring1.R 09:pinky1.R
+    10:pinky2.L 11:ring2.L 12:middle2.L 13:indexB2.L 14:indexA2.L | 15:indexA2.R 16:indexB2.R 17:middle2.R 18:ring2.R 19:pinky2.R
+    20:pinky3.L 21:ring3.L 22:middle3.L 23:indexB3.L 24:indexA3.L | 25:indexA3.R 26:indexB3.R 27:middle3.R 28:ring3.R 29:pinky3.R
+                                        30:thumb2.L  31:thumb1.L  | 32:thumb1.R  33:thumb2.R
+    */
+
     combos {
         compatible = "zmk,combos";
-        combo_esc {
-            timeout-ms = <50>;
-            key-positions = <0 1>;
-            bindings = <&kp ESC>;
-        };
 
-         combo_tab {
+        combo_tab {
             timeout-ms = <50>;
-            key-positions = <10 11>;
+            key-positions = <1 2>; // ring1.L + middle1.L
             bindings = <&kp TAB>;
         };
 
-            combo_ralt {
+        combo_lctrl {
             timeout-ms = <50>;
-            key-positions = <17 16>;
+            key-positions = <21 22>; // ring3.L + middle3.L
+            bindings = <&kp LCTRL>;
+        };
+
+        combo_ralt {
+            timeout-ms = <50>;
+            key-positions = <27 28>; // middle3.R + ring3.R
             bindings = <&kp RALT>;
         };
 
-                    combo_lalt {
+        combo_win {
             timeout-ms = <50>;
-            key-positions = <11 12>;
-            bindings = <&kp LALT>;
+            key-positions = <31 30>; // thumb1.L + thumb2.L
+            bindings = <&kp LWIN>;
         };
 
-                           combo_lgui {
+        combo_capslock {
             timeout-ms = <50>;
-            key-positions = <12 13>;
-            bindings = <&kp LGUI>;
+            layers = <ALPHA>;
+            key-positions = <4 5>; // indexA1.L + indexA1.R
+            bindings = <&kp CAPS>;
         };
 
-
-       combo_rgui {
+        combo_capsword {
             timeout-ms = <50>;
-            key-positions = <17 18>;
-            bindings = <&kp RGUI>;
+            layers = <ALPHA>;
+            key-positions = <14 15>;  // indexA2.L + indexA@.R
+            bindings = <&caps_word>;
         };
-
-
-
     };
 
-        keymap {
-                compatible = "zmk,keymap";
+    keymap {
+        compatible = "zmk,keymap";
 
-            default_layer {
-        bindings = <
-        &kp Q &kp W &kp E &kp R &kp T                       &kp Y &kp U  &kp I    &kp O   &kp P
-        &kp A &kp S &kp D &kp F &kp G                               &kp H &kp J &kp K &kp L &kp QUOT
-        &mt LSFT Z &kp X &kp C &kp V &kp B                      &kp N &kp M  &kp CMMA &kp DOT &mt LSFT RET
-                        &mo 1 &kp LCTL                  &kp SPC &mo 2
-        >;
+        // 0: Default/Alpha
+        alpha_layer {
+            /*
+                |  Q  |   W   |   F    |    P    |      B       ||||    J     |   L/;     |     U     |   Y    |       |
+                |  A  |   R   |   S    |    T    |      G       ||||   M/.    |   N/:     |    E/_    |   I    |   O   |
+                |  Z  |   X   |   C    |    D    |   V/SHIFT    |||| K/SHIFT  |    H      |     ,     |        |       |
+                              | BKSpace / Delete |   Space/L2   |||| Enter/L1 |  Escape   |
+            */
+            bindings = <
+                &kp Q   &kp W   &kp F   &kp P     &kp B         /**/ &kp J       &mt SEMI L  &kp U       &kp Y   &none
+                &kp A   &kp R   &kp S   &kp T     &kp G         /**/ &mt DOT M   &mt COLON N &mt UNDER E &kp I   &kp O
+                &kp X   &kp C   &kp D   &kp V     &mt LSHFT Z   /**/ &mt RSHFT K &kp H       &kp COMMA   &kp DOT &none
+                                &mt DEL BSPC      &lt SYM SPACE /**/ &lt NUM RET &kp ESC
+            >;
         };
 
-            left_layer {
-        bindings = <
-        &kp NUM_1  &kp NUM_2    &kp NUM_3    &kp NUM_4    &kp NUM_5     &kp NUM_6 &kp NUM_7 &kp NUM_8 &kp NUM_9 &kp NUM_0
-        &kp TAB    &kp LC(S)    &kp DQT      &kp PIPE2     &kp HASH         &kp MINUS &kp EQL  &kp LBKT &kp RBKT  &kp DEL
-        &kp ESC    &kp TILDE    &kp NON_US_BSLH &kp NON_US_HASH  &kp TILDE2     &kp MINUS &kp GRAVE &kp LBKT &kp RBKT  &kp DEL
-                        &mo 1  &kp LGUI                     &kp RGUI &mo 2
-        >;
+        // 1: Numbers & Function
+        number_layer {
+            /*
+                |       |   4   |   5   |   6   |      ||||  F10   |   F4   |   F5  |   F6  |      |
+                |   .   |   1   |   2   |   3   |      ||||  F11   |   F1   |   F2  |   F3  |      |
+                |       |   7   |   8   |   9   |      ||||  F12   |   F7   |   F8  |   F9  |      |
+                                        |   0   |      |||| LAYER  |        |
+            */
+            bindings = <
+                &none    &kp N4  &kp N5  &kp N6  &none /**/ &kp F10  &kp F4  &kp F5  &kp F6  &none
+                &kp DOT  &kp N1  &kp N2  &kp N3  &none /**/ &kp F11  &kp F1  &kp F2  &kp F3  &none
+                &none    &kp N7  &kp N8  &kp N9  &none /**/ &kp F12  &kp F7  &kp F8  &kp F9  &none
+                                         &kp N0  &none /**/ &none    &none
+            >;
         };
 
-        right_layer {
-        bindings = <
-        &kp BANG  &kp ATSN &kp HASH  &kp DLLR  &kp PRCT             &kp CRRT  &kp AMPS &kp KMLT &kp LPRN &kp RPRN
-        &kp HASH  &kp QMARK  &kp FSLH  &kp COLN  &kp SCLN           &kp MINUS &kp KP_EQUAL  &kp LBRC  &kp RBRC   &kp BKSP
-        &kp LSFT  &kp KPLS &kp LBKT &kp RBKT   &kp BSLH             &kp UNDER &kp LEFT &kp DOWN &kp UP  &kp RIGHT
-                      &mo 3 &kp LCTL                &kp SPC  &mo 2
-        >;
+        // 2: Symbols
+        symbol_layer {
+            /*
+                |    '   |    <   |    >   |    "    |   .     ||||   &   |   :   |   [   |   ]   |   %   |
+                |    !   |    -   |    +   |    =    |   #     ||||   |   |   ;   |   (   |   )   |   ?   |
+                |    ^   |    /   |    *   |    \    |         ||||   ~   |   $   |   {   |   }   |   @   |
+                                           |         |  LAYER  ||||       |   `   |
+            */
+            bindings = <
+                &kp QUOTE &kp LT   &kp GT   &kp DQT   &kp DOT  /**/ &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp PERCENT
+                &kp DOT   &kp MIUS &kp PLUS &kp EQUAL &kp HASH /**/ &kp PIPE  &kp SEMI   &kp LPAR &kp RPAR &kp QMARK
+                &kp CARET &kp FSLH &kp BSLH &kp BSLH  &none    /**/ &kp TILDE &kp DOLLAR &kp RBRC &kp RBRC &kp AT
+                                            &none     &none    /**/ &none     &kp GRAVE
+            >;
         };
 
-        tri_layer {
-        bindings = <
-        &kp NUM_1  &kp NUM_2    &kp NUM_3    &kp NUM_4    &kp NUM_5             &trans &trans   &trans   &trans  &trans
-        &kp F1 &kp F2 &kp F3 &kp F4 &kp F5                          &trans &kp PG_UP  &kp K_VOL_UP &kp K_MUTE &trans
-        &bt BT_CLR  &bt BT_NXT &bt BT_PRV &kp F6 &kp F7                 &trans &kp PG_DN  &kp K_VOL_DN  &trans &trans
-                     &trans &trans                      &trans &trans
-        >;
-        };
+        // 3: Navigation
+        // Right: Arrow Keys
+        // Left: Ctrl (for char and word nav via arrow keys)
+        // Left: Home (start), End (end), Page Up (up), Page Down (down)
+        // Insert, Print Screen
+        // Media bindings https://zmk.dev/docs/codes/media (prev, next, mute, volume up, volume down, pause/play)
+        //nav_layer {};
+
+        /* TODO: gaming layer
+            QWERTY left hand + num row
+            Arrow Keys?
+            Tab, Shift, Space
+        */
+        //gaming_layer {
+            /*
+            |   Q   |   W   |   E   |   R   |   T   ||   Y   |   I   |   O   |   P   |       |
+            |   A   |   S   |   D   |   F   |   G   ||   H   |   J   |   K   |   L   |       |
+            |   Z   |   X   |   C   |   V   |   B   ||   N   |   M   |   ,   |   .   |       |
+                                    |       |       ||       |       |
+            */
+        //};
 
     };
 };
