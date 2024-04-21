@@ -78,13 +78,21 @@ Behaviors (https://zmk.dev/docs/behaviors)
     Num & Scroll Lock; not present
 */
 
+/* Keyboard Overlay Presentation Requirements
+    Separate background (outline vs fill) from key svg paths
+    Each switch has a primary (tap) and optional secondary (hold)
+        layer bindings have special color
+    Combos (label + background at pos, w/ connecting lines to bound keys)
+
+*/
+
 / {
 
     /* LAYOUT
     00:pinky1.L 01:ring1.L 02:middle1.L 03:indexB1.L 04:indexA1.L | 05:indexA1.R 06:indexB1.R 07:middle1.R 08:ring1.R 09:pinky1.R
     10:pinky2.L 11:ring2.L 12:middle2.L 13:indexB2.L 14:indexA2.L | 15:indexA2.R 16:indexB2.R 17:middle2.R 18:ring2.R 19:pinky2.R
     20:pinky3.L 21:ring3.L 22:middle3.L 23:indexB3.L 24:indexA3.L | 25:indexA3.R 26:indexB3.R 27:middle3.R 28:ring3.R 29:pinky3.R
-                                        30:thumb2.L  31:thumb1.L  | 32:thumb1.R  33:thumb2.R
+                                        30:thumbB.L  31:thumbA.L  | 32:thumbA.R  33:thumbB.R
     */
 
     combos {
@@ -110,7 +118,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
 
         combo_win {
             timeout-ms = <50>;
-            key-positions = <31 30>; // thumb1.L + thumb2.L
+            key-positions = <31 30>; // thumbA.L + thumbB.L
             bindings = <&kp LWIN>;
         };
 
@@ -124,7 +132,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
         combo_capsword {
             timeout-ms = <50>;
             layers = <ALPHA>;
-            key-positions = <14 15>;  // indexA2.L + indexA@.R
+            key-positions = <14 15>; // indexA2.L + indexA@.R
             bindings = <&caps_word>;
         };
     };
@@ -135,58 +143,67 @@ Behaviors (https://zmk.dev/docs/behaviors)
         // 0: Default/Alpha
         alpha_layer {
             /*
-                |  Q  |   W   |   F    |    P    |      B       ||||    J     |   L/;     |     U     |   Y    |       |
-                |  A  |   R   |   S    |    T    |      G       ||||   M/.    |   N/:     |    E/_    |   I    |   O   |
-                |  Z  |   X   |   C    |    D    |   V/SHIFT    |||| K/SHIFT  |    H      |     ,     |        |       |
-                              | BKSpace / Delete |   Space/L2   |||| Enter/L1 |  Escape   |
+                |  Q  |   W   |     F     |      P     |   B   ||||     J      |   L/;     |     U     |   Y    |       |
+                |  A  |   R   |    S/L3   |   T/SHIFT  |   G   ||||    M/.     |  N/SHIFT  |    E/_    |   I    |   O   |
+                |  Z  |   X   |     C     |      D     |   V   ||||    K/:     |    H      |     ,     |        |       |
+                              | BKSpace / Delete |   Space/L2  ||||  Enter/L1  |  Escape   |
             */
             bindings = <
-                &kp Q   &kp W   &kp F   &kp P     &kp B         /**/ &kp J       &mt SEMI L  &kp U       &kp Y   &none
-                &kp A   &kp R   &kp S   &kp T     &kp G         /**/ &mt DOT M   &mt COLON N &mt UNDER E &kp I   &kp O
-                &kp X   &kp C   &kp D   &kp V     &mt LSHFT Z   /**/ &mt RSHFT K &kp H       &kp COMMA   &kp DOT &none
-                                &mt DEL BSPC      &lt SYM SPACE /**/ &lt NUM RET &kp ESC
+                &kp Q   &kp W   &kp F      &kp P        &kp B  /**/ &kp J       &mt SEMI L  &kp U       &kp Y   &none
+                &kp A   &kp R   &lt NAV S  &mt LSHFT T  &kp G  /**/ &mt DOT M   &mt RSHFT N &mt UNDER E &kp I   &kp O
+                &kp X   &kp C   &kp D      &kp V        &kp Z  /**/ &mt COLON K &kp H       &kp COMMA   &kp DOT &none
+                                &mt DEL BSPC     &lt SYM SPACE /**/ &lt NUM RET &kp ESC
             >;
         };
 
         // 1: Numbers & Function
         number_layer {
             /*
-                |       |   4   |   5   |   6   |      ||||  F10   |   F4   |   F5  |   F6  |      |
-                |   .   |   1   |   2   |   3   |      ||||  F11   |   F1   |   F2  |   F3  |      |
-                |       |   7   |   8   |   9   |      ||||  F12   |   F7   |   F8  |   F9  |      |
-                                        |   0   |      |||| LAYER  |        |
+                |       |   4   |   5   |   6   |       ||||  F10   |   F4   |   F5  |   F6  |      |
+                |   .   |   1   |   2   |   3   |       ||||  F11   |   F1   |   F2  |   F3  |      |
+                |       |   7   |   8   |   9   |       ||||  F12   |   F7   |   F8  |   F9  |      |
+                                        |       |   0   |||| LAYER  |        |
             */
             bindings = <
-                &none    &kp N4  &kp N5  &kp N6  &none /**/ &kp F10  &kp F4  &kp F5  &kp F6  &none
-                &kp DOT  &kp N1  &kp N2  &kp N3  &none /**/ &kp F11  &kp F1  &kp F2  &kp F3  &none
-                &none    &kp N7  &kp N8  &kp N9  &none /**/ &kp F12  &kp F7  &kp F8  &kp F9  &none
-                                         &kp N0  &none /**/ &none    &none
-            >;
+                &none    &kp N4  &kp N5  &kp N6  &none  /**/ &kp F10  &kp F4  &kp F5  &kp F6  &none
+                &kp DOT  &kp N1  &kp N2  &kp N3  &none  /**/ &kp F11  &kp F1  &kp F2  &kp F3  &none
+                &none    &kp N7  &kp N8  &kp N9  &none  /**/ &kp F12  &kp F7  &kp F8  &kp F9  &none
+                                         &none   &kp N0 /**/ &none    &none
+            >; 
         };
 
         // 2: Symbols
         symbol_layer {
             /*
-                |    '   |    <   |    >   |    "    |   .     ||||   &   |   :   |   [   |   ]   |   %   |
-                |    !   |    -   |    +   |    =    |   #     ||||   |   |   ;   |   (   |   )   |   ?   |
-                |    ^   |    /   |    *   |    \    |         ||||   ~   |   $   |   {   |   }   |   @   |
-                                           |         |  LAYER  ||||       |   `   |
+                |    '   |    <    |    >   |    "    |   .     ||||   &   |   :   |   [   |   ]   |   %   |
+                |    !   |    -    |    +   |    =    |   #     ||||   |   |   ;   |   (   |   )   |   ?   |
+                |    ^   |    /    |    *   |    \    |         ||||   ~   |   $   |   {   |   }   |   @   |
+                                            |         |  LAYER  ||||       |   `   |
             */
             bindings = <
-                &kp SQT   &kp LT   &kp GT   &kp DQT   &kp DOT  /**/ &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp PERCENT
-                &kp DOT   &kp MIUS &kp PLUS &kp EQUAL &kp HASH /**/ &kp PIPE  &kp SEMI   &kp LPAR &kp RPAR &kp QMARK
-                &kp CARET &kp FSLH &kp BSLH &kp BSLH  &none    /**/ &kp TILDE &kp DOLLAR &kp RBRC &kp RBRC &kp AT
-                                            &none     &none    /**/ &none     &kp GRAVE
+                &kp SQT   &kp LT    &kp GT   &kp DQT   &kp DOT  /**/ &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp PERCENT
+                &kp DOT   &kp MINUS &kp PLUS &kp EQUAL &kp HASH /**/ &kp PIPE  &kp SEMI   &kp LPAR &kp RPAR &kp QMARK
+                &kp CARET &kp FSLH  &kp BSLH &kp BSLH  &none    /**/ &kp TILDE &kp DOLLAR &kp RBRC &kp RBRC &kp AT
+                                             &none     &none    /**/ &none     &kp GRAVE
             >;
         };
 
         // 3: Navigation
-        // Right: Arrow Keys
-        // Left: Ctrl (for char and word nav via arrow keys)
-        // Left: Home (start), End (end), Page Up (up), Page Down (down)
-        // Insert, Print Screen
-        // Media bindings https://zmk.dev/docs/codes/media (prev, next, mute, volume up, volume down, pause/play)
-        //nav_layer {};
+        nav_layer {
+            /*  
+                |    |      |       |      Next      |     VUp     ||||   PrintScreen  |             |  ↑/Page Up   |             |     |
+                |    |      | LAYER |      Play      |    Mute     ||||   Pause Break  |   ←/Home    | ↓/Page Down  |    →/End    |     |
+                |    |      |       |      Prev      |    VDown    ||||                |             |              |             |     |
+                                    |                |             ||||       Ctrl     |             |
+            */
+            bindings = <
+                &none &none &none    &kp C_NEXT       &kp C_VOL_UP /**/ &kp PSCRN       &none         &mt PG_UP UP   &none         &none
+                &none &none &none    &kp C_PLAY_PAUSE &kp C_MUTE   /**/ &kp PAUSE_BREAK &mt HOME LEFT &mt PG_DN DOWN &mt END RIGHT &none
+                &none &none &none    &kp C_PREV       &kp C_VOL_DN /**/ &none           &none         &none          &none         &none
+                &none &none &none    &kp C_PREV       &kp C_VOL_DN /**/ &none           &none         &none          &none         &none
+                                     &none            &none        /**/ &kp RCTRL       &none
+            >;
+        };
 
         /* TODO: gaming layer
             QWERTY left hand + num row
