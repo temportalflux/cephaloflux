@@ -105,12 +105,10 @@ Behaviors (https://zmk.dev/docs/behaviors)
             #binding-cells = <2>;
             bindings
                 = <&macro_param_1to1>
-                , <&macro_press &mo MACRO_PLACEHOLDER>
-                , <&macro_press &kp F21>
+                , <&macro_press &mo MACRO_PLACEHOLDER &kp F21>
                 , <&macro_pause_for_release>
-                , <&macro_release &kp F21>
                 , <&macro_param_1to1>
-                , <&macro_release &mo MACRO_PLACEHOLDER>
+                , <&macro_release &mo MACRO_PLACEHOLDER &kp F21>
                 ;
         };
         lhf22: layer_hold_f22 {
@@ -131,12 +129,10 @@ Behaviors (https://zmk.dev/docs/behaviors)
             #binding-cells = <2>;
             bindings
                 = <&macro_param_1to1>
-                , <&macro_press &mo MACRO_PLACEHOLDER>
-                , <&macro_press &kp F23>
+                , <&macro_press &mo MACRO_PLACEHOLDER &kp F23>
                 , <&macro_pause_for_release>
-                , <&macro_release &kp F23>
                 , <&macro_param_1to1>
-                , <&macro_release &mo MACRO_PLACEHOLDER>
+                , <&macro_release &mo MACRO_PLACEHOLDER &kp F23>
                 ;
         };
     };
