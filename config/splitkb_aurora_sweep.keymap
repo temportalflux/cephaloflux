@@ -147,7 +147,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
             quick-tap-ms = <200>;
-            bindings = <&lhnum>, <&kp>;
+            bindings = <&lhf21>, <&kp>;
         };
         ltf22: layer-tap-signaled-f22 {
             compatible = "zmk,behavior-hold-tap";
@@ -155,7 +155,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
             quick-tap-ms = <200>;
-            bindings = <&lhsym>, <&kp>;
+            bindings = <&lhf22>, <&kp>;
         };
         ltf23: layer-tap-signaled-f23 {
             compatible = "zmk,behavior-hold-tap";
@@ -163,7 +163,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
             quick-tap-ms = <200>;
-            bindings = <&lhnav>, <&kp>;
+            bindings = <&lhf23>, <&kp>;
         };
     };
 
