@@ -91,6 +91,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
 / {
     chosen {
         zmk,underglow = &led_strip;
+        zmk,backlight = &backlight;
     };
 
     /* LAYOUT
