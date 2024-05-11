@@ -85,6 +85,12 @@ Behaviors (https://zmk.dev/docs/behaviors)
 */
 
 / {
+    &led_strip {
+        chain-length = <6>;
+    };
+    chosen {
+        zmk,underglow = &led_strip;
+    };
 
     /* LAYOUT
     00:pinky1.L 01:ring1.L 02:middle1.L 03:indexB1.L 04:indexA1.L | 05:indexA1.R 06:indexB1.R 07:middle1.R 08:ring1.R 09:pinky1.R
