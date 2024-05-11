@@ -258,15 +258,15 @@ Behaviors (https://zmk.dev/docs/behaviors)
         // 3: Navigation
         nav_layer {
             /*  
-                |            | |       |      Next      |     VUp     ||||   PrintScreen  |             |  ↑/Page Up   |             |     |
-                | BootLoader | | LAYER |      Play      |    Mute     ||||   Pause Break  |   ←/Home    | ↓/Page Down  |    →/End    |     |
-                | Sys Reset  | |       |      Prev      |    VDown    ||||                |             |              |             |     |
+                |            | |       |      Next      |     VUp     ||||   PrintScreen  |             |  ↑/Page Up   |             |            |
+                | BootLoader | | LAYER |      Play      |    Mute     ||||   Pause Break  |   ←/Home    | ↓/Page Down  |    →/End    | BootLoader |
+                | Sys Reset  | |       |      Prev      |    VDown    ||||                |             |              |             | Sys Reset  |
                                        |                |             ||||       Ctrl     |             |
             */
             bindings = <
                 &none       &none &none    &kp C_NEXT       &kp C_VOL_UP /**/ &kp PSCRN       &none           &mt PG_UP UP   &none         &none
-                &bootloader	&none &none    &kp C_PLAY_PAUSE &kp C_MUTE   /**/ &kp PAUSE_BREAK &mt HOME LEFT   &mt PG_DN DOWN &mt END RIGHT &none
-                &sys_reset  &none &none    &kp C_PREV       &kp C_VOL_DN /**/ &rgb_ug RGB_BRD &rgb_ug RGB_BRI &none          &none         &none
+                &bootloader	&none &none    &kp C_PLAY_PAUSE &kp C_MUTE   /**/ &kp PAUSE_BREAK &mt HOME LEFT   &mt PG_DN DOWN &mt END RIGHT &bootloader
+                &sys_reset  &none &none    &kp C_PREV       &kp C_VOL_DN /**/ &rgb_ug RGB_BRD &rgb_ug RGB_BRI &none          &none         &sys_reset
                                      &none            &none        /**/ &kp RCTRL       &none
             >;
         };
