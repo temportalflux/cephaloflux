@@ -8,6 +8,14 @@ profile "tesseract" {
 		offset 0 40
 	}
 }
+profile "surface" {
+	size 1720 800
+	scale 0.5
+	location {
+		anchor "BottomLeft"
+		offset 0 90
+	}
+}
 /*
 bindings that are lowercase or non-numpad numerical are autoshifted when shift is held
 combos:
