@@ -84,10 +84,11 @@ Behaviors (https://zmk.dev/docs/behaviors)
     Combos (label + background at pos, w/ connecting lines to bound keys)
 */
 
+&led_strip {
+    chain-length = <6>;
+};
+
 / {
-    &led_strip {
-        chain-length = <6>;
-    };
     chosen {
         zmk,underglow = &led_strip;
     };
