@@ -85,7 +85,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
 */
 
 &led_strip {
-    chain-length = <6>;
+    chain-length = <23>;
 };
 
 / {
