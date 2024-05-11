@@ -101,8 +101,8 @@ Behaviors (https://zmk.dev/docs/behaviors)
     */
     macros {
         lhnum: layer_hold_num {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
+            compatible = "zmk,behavior-macro-two-param";
+            #binding-cells = <2>;
             bindings
                 = <&macro_press &mo NUM>
                 , <&macro_press &kp F21>
@@ -112,8 +112,8 @@ Behaviors (https://zmk.dev/docs/behaviors)
                 ;
         };
         lhsym: layer_hold_sym {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
+            compatible = "zmk,behavior-macro-two-param";
+            #binding-cells = <2>;
             bindings
                 = <&macro_press &mo SYM>
                 , <&macro_press &kp F22>
@@ -123,8 +123,8 @@ Behaviors (https://zmk.dev/docs/behaviors)
                 ;
         };
         lhnav: layer_hold_nav {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
+            compatible = "zmk,behavior-macro-two-param";
+            #binding-cells = <2>;
             bindings
                 = <&macro_press &mo NAV>
                 , <&macro_press &kp F23>
@@ -211,14 +211,14 @@ Behaviors (https://zmk.dev/docs/behaviors)
             /*
                 |  Q  |   W   |     F     |      P     |   B   ||||     J      |   L/;     |     U     |   Y    |       |
                 |  A  |   R   |    S/L3   |   T/SHIFT  |   G   ||||    M/.     |  N/SHIFT  |    E/_    |   I    |   O   |
-                |  Z  |   X   |     C     |      D     |   V   ||||    K/:     |    H      |     ,     |   .    |       |
+                |  Z  |   X   |     C     |      D     |   V   ||||    K/:     |    H      |     ,     |        |       |
                               | BKSpace / Delete |   Space/L2  ||||  Enter/L1  |  Escape   |
             */
             bindings = <
                 &kp Q   &kp W   &kp F      &kp P        &kp B  /**/ &kp J       &mt SEMI L  &kp U       &kp Y   &none
-                &kp A   &kp R   &lt NAV S   &mt LSHFT T  &kp G  /**/ &mt DOT M   &mt RSHFT N &mt UNDER E &kp I   &kp O
-                &kp Z   &kp X   &kp C      &kp D        &kp V  /**/ &mt COLON K &kp H       &kp COMMA   &kp DOT &none
-                                &mt DEL BSPC     &lt SYM SPACE  /**/ &lt NUM RET  &kp ESC
+                &kp A   &kp R   &lt NAV S   &mt LSHFT T  &kp G /**/ &mt DOT M   &mt RSHFT N &mt UNDER E &kp I   &kp O
+                &kp Z   &kp X   &kp C      &kp D        &kp V  /**/ &mt COLON K &kp H       &kp COMMA   &none   &none
+                                &mt DEL BSPC     &lt SYM SPACE /**/ &lt NUM RET  &kp ESC
             >;
         };
 
@@ -229,7 +229,6 @@ Behaviors (https://zmk.dev/docs/behaviors)
                 |   .   |   1   |   2   |   3   |       ||||  F11   |   F1   |   F2  |   F3  |      |
                 |       |   7   |   8   |   9   |       ||||  F12   |   F7   |   F8  |   F9  |      |
                                         |       |   0   |||| LAYER  |        |
-            '<>"..-+=.........--+=#/*\^
             */
             bindings = <
                 &none    &kp N4  &kp N5  &kp N6  &none  /**/ &kp F10  &kp F4  &kp F5  &kp F6  &none
@@ -250,7 +249,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
             bindings = <
                 &kp SQT   &kp LT    &kp GT   &kp DQT   &kp DOT   /**/ &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp PERCENT
                 &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL &kp HASH  /**/ &kp PIPE  &kp SEMI   &kp LPAR &kp RPAR &kp QMARK
-                &none     &kp FSLH  &kp STAR &kp BSLH  &kp CARET /**/ &kp TILDE &kp DOLLAR &kp LBRC &kp RBRC &kp AT
+                &none     &kp FSLH  &kp STAR &kp BSLH  &kp CARET /**/ &kp TILDE &kp DOLLAR &mt RBRC LBRC &kp RBRC &kp AT
                                              &none     &none     /**/ &none     &kp GRAVE
             >;
         };
@@ -264,10 +263,10 @@ Behaviors (https://zmk.dev/docs/behaviors)
                                        |                |             ||||       Ctrl     |             |
             */
             bindings = <
-                &bt BT_CLR  &none &none    &kp C_NEXT       &kp C_VOL_UP /**/ &kp PSCRN       &none           &mt PG_UP UP   &none         &none
+                &bt BT_CLR  &none &none    &kp C_NEXT       &kp C_VOL_UP /**/ &kp PSCRN       &none           &mt PG_UP UP   &none         &rgb_ug RGB_TOG
                 &bootloader	&none &none    &kp C_PLAY_PAUSE &kp C_MUTE   /**/ &kp PAUSE_BREAK &mt HOME LEFT   &mt PG_DN DOWN &mt END RIGHT &bootloader
                 &sys_reset  &none &none    &kp C_PREV       &kp C_VOL_DN /**/ &rgb_ug RGB_BRD &rgb_ug RGB_BRI &none          &none         &sys_reset
-                                     &none            &none              /**/ &kp RCTRL       &none
+                                           &none            &none        /**/ &kp RCTRL       &none
             >;
         };
 
