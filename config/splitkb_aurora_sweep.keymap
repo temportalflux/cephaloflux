@@ -204,7 +204,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
             /*
                 |  Q  |   W   |     F     |      P     |   B   ||||     J      |   L/;     |     U     |   Y    |       |
                 |  A  |   R   |    S/L3   |   T/SHIFT  |   G   ||||    M/.     |  N/SHIFT  |    E/_    |   I    |   O   |
-                |  Z  |   X   |     C     |      D     |   V   ||||    K/:     |    H      |     ,     |        |       |
+                |  Z  |   X   |     C     |      D     |   V   ||||    K/:     |    H      |     ,     |   .    |       |
                               | BKSpace / Delete |   Space/L2  ||||  Enter/L1  |  Escape   |
             */
             bindings = <
@@ -222,6 +222,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
                 |   .   |   1   |   2   |   3   |       ||||  F11   |   F1   |   F2  |   F3  |      |
                 |       |   7   |   8   |   9   |       ||||  F12   |   F7   |   F8  |   F9  |      |
                                         |       |   0   |||| LAYER  |        |
+            '<>"..-+=.........--+=#/*\^
             */
             bindings = <
                 &none    &kp N4  &kp N5  &kp N6  &none  /**/ &kp F10  &kp F4  &kp F5  &kp F6  &none
@@ -241,8 +242,8 @@ Behaviors (https://zmk.dev/docs/behaviors)
             */
             bindings = <
                 &kp SQT   &kp LT    &kp GT   &kp DQT   &kp DOT   /**/ &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp PERCENT
-                &kp DOT   &kp MINUS &kp PLUS &kp EQUAL &kp HASH  /**/ &kp PIPE  &kp SEMI   &kp LPAR &kp RPAR &kp QMARK
-                &none     &kp FSLH  &kp STAR &kp BSLH  &kp CARET /**/ &kp TILDE &kp DOLLAR &kp RBRC &kp RBRC &kp AT
+                &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL &kp HASH  /**/ &kp PIPE  &kp SEMI   &kp LPAR &kp RPAR &kp QMARK
+                &none     &kp FSLH  &kp STAR &kp BSLH  &kp CARET /**/ &kp TILDE &kp DOLLAR &kp LBRC &kp RBRC &kp AT
                                              &none     &none     /**/ &none     &kp GRAVE
             >;
         };
