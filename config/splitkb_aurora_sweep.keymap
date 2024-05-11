@@ -77,14 +77,11 @@ Behaviors (https://zmk.dev/docs/behaviors)
 /* TODO
     Num & Scroll Lock; not present
     Layer Tap Toggle to gaming bindings
+    Insert toggle not present
 */
 
 /* Keyboard Overlay Presentation Requirements
-    Separate background (outline vs fill) from key svg paths
-    Each switch has a primary (tap) and optional secondary (hold)
-        layer bindings have special color
     Combos (label + background at pos, w/ connecting lines to bound keys)
-
 */
 
 / {

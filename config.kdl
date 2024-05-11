@@ -1,6 +1,6 @@
 default_profile "tesseract"
 profile "tesseract" {
-	size 720 300
+	size 700 300
 	scale 1.0
 	location {
 		monitor 1
@@ -8,194 +8,414 @@ profile "tesseract" {
 		offset 0 40
 	}
 }
+/*
+bindings that are lowercase or non-numpad numerical are autoshifted when shift is held
+combos:
+	binding label + links
+	link is:
+		start (vec2 of [-1,1] indicating position on the rendered label)
+		end (switch label and [-1,1] vec2 indicating the endpoint)
+		a list of control points (vec2 in window space)
+Tab is Bootstrap "indent"
+*/
 layout {
 	default_layer "alpha"
+	default_layer "number"
+	default_layer "symbol"
+	default_layer "nav"
 
-	switch "thumbA.L"  31 "AltLeft"			 40.0 -110.0 side="left"
-	switch "thumbB.L"  30 "ControlLeft"		100.0 -110.0 side="left"
-	switch "indexA1.L"  4 "T"				 70.0   70.0 side="left"
-	switch "indexA2.L" 14 "G"				 70.0   10.0 side="left"
-	switch "indexA3.L" 24 "B"				 70.0  -50.0 side="left"
-	switch "indexB1.L"  3 "R"				130.0   80.0 side="left"
-	switch "indexB2.L" 13 "F"				130.0   20.0 side="left"
-	switch "indexB3.L" 23 "V"				130.0  -40.0 side="left"
-	switch "middle1.L"  2 "E"				190.0  100.0 side="left"
-	switch "middle2.L" 12 "D"				190.0   40.0 side="left"
-	switch "middle3.L" 22 "C"				190.0  -20.0 side="left"
-	switch "ring1.L"    1 "W"				250.0   80.0 side="left"
-	switch "ring2.L"   11 "S"				250.0   20.0 side="left"
-	switch "ring3.L"   21 "X"				250.0  -40.0 side="left"
-	switch "pinky1.L"   0 "Q"				310.0   40.0 side="left"
-	switch "pinky2.L"  10 "A"				310.0  -20.0 side="left"
-	switch "pinky3.L"  20 "Z"				310.0  -80.0 side="left"
+	switch "thumbA.L"   40.0 -110.0 side="left"
+	switch "thumbB.L"  100.0 -110.0 side="left"
+	switch "indexA1.L"  70.0   70.0 side="left"
+	switch "indexA2.L"  70.0   10.0 side="left"
+	switch "indexA3.L"  70.0  -50.0 side="left"
+	switch "indexB1.L" 130.0   80.0 side="left"
+	switch "indexB2.L" 130.0   20.0 side="left"
+	switch "indexB3.L" 130.0  -40.0 side="left"
+	switch "middle1.L" 190.0  100.0 side="left"
+	switch "middle2.L" 190.0   40.0 side="left"
+	switch "middle3.L" 190.0  -20.0 side="left"
+	switch "ring1.L"   250.0   80.0 side="left"
+	switch "ring2.L"   250.0   20.0 side="left"
+	switch "ring3.L"   250.0  -40.0 side="left"
+	switch "pinky1.L"  310.0   40.0 side="left"
+	switch "pinky2.L"  310.0  -20.0 side="left"
+	switch "pinky3.L"  310.0  -80.0 side="left"
 
-	switch "thumbA.R"  32 "ControlRight"	 40.0 -110.0 side="right"
-	switch "thumbB.R"  33 "AltRight"		100.0 -110.0 side="right"
-	switch "indexA1.R"  5 "Y"				 70.0   70.0 side="right"
-	switch "indexA2.R" 15 "H"				 70.0   10.0 side="right"
-	switch "indexA3.R" 25 "N"				 70.0  -50.0 side="right"
-	switch "indexB1.R"  6 "U"				130.0   80.0 side="right"
-	switch "indexB2.R" 16 "J"				130.0   20.0 side="right"
-	switch "indexB3.R" 26 "M"				130.0  -40.0 side="right"
-	switch "middle1.R"  7 "I"				190.0  100.0 side="right"
-	switch "middle2.R" 17 "K"				190.0   40.0 side="right"
-	switch "middle3.R" 27 ","				190.0  -20.0 side="right"
-	switch "ring1.R"    8 "O"				250.0   80.0 side="right"
-	switch "ring2.R"   18 "L"				250.0   20.0 side="right"
-	switch "ring3.R"   28 "Dot"				250.0  -40.0 side="right"
-	switch "pinky1.R"   9 "P"				310.0   40.0 side="right"
-	switch "pinky2.R"  19 "SemiColon"		310.0  -20.0 side="right"
-	switch "pinky3.R"  29 "Slash"			310.0  -80.0 side="right"
+	switch "thumbA.R"   40.0 -110.0 side="right"
+	switch "thumbB.R"  100.0 -110.0 side="right"
+	switch "indexA1.R"  70.0   70.0 side="right"
+	switch "indexA2.R"  70.0   10.0 side="right"
+	switch "indexA3.R"  70.0  -50.0 side="right"
+	switch "indexB1.R" 130.0   80.0 side="right"
+	switch "indexB2.R" 130.0   20.0 side="right"
+	switch "indexB3.R" 130.0  -40.0 side="right"
+	switch "middle1.R" 190.0  100.0 side="right"
+	switch "middle2.R" 190.0   40.0 side="right"
+	switch "middle3.R" 190.0  -20.0 side="right"
+	switch "ring1.R"   250.0   80.0 side="right"
+	switch "ring2.R"   250.0   20.0 side="right"
+	switch "ring3.R"   250.0  -40.0 side="right"
+	switch "pinky1.R"  310.0   40.0 side="right"
+	switch "pinky2.R"  310.0  -20.0 side="right"
+	switch "pinky3.R"  310.0  -80.0 side="right"
 
 	layer "alpha" {
-		bind "thumbA.L"  (MDI)"backspace" hold=(MDI)"backspace-reverse"
-		bind "thumbB.L"  (MDI)"keyboard-space" hold=(Layer)"SYM"
-		bind "indexA1.L" "b"
-		bind "indexA2.L" "g"
-		bind "indexA3.L" "v"
-		bind "indexB1.L" "p"
-		bind "indexB2.L" "t" hold="SHIFT"
-		bind "indexB3.L" "d"
-		bind "middle1.L" "f"
-		bind "middle2.L" "s" hold=(Layer)"NAV"
-		bind "middle3.L" "c"
-		bind "ring1.L"   "w"
-		bind "ring2.L"   "r"
-		bind "ring3.L"   "x"
-		bind "pinky1.L"  "q"
-		bind "pinky2.L"  "a"
-		bind "pinky3.L"  "z"
+		bind "thumbA.L" {
+			slot "Tap" "Space" (IconCustom)"space"
+			slot "Hold" "F12" "SYM" layer="symbol" // f22
+		}
+		bind "thumbB.L" {
+			slot "Tap" "Backspace" (IconBootstrap)"backspace-fill"
+			slot "Hold" "Delete" "DEL"
+		}
+		bind "indexA1.L" {
+			slot "Tap" "B"
+		}
+		bind "indexA2.L" {
+			slot "Tap" "G"
+		}
+		bind "indexA3.L" {
+			slot "Tap" "V"
+		}
+		bind "indexB1.L" {
+			slot "Tap" "P"
+		}
+		bind "indexB2.L" {
+			slot "Tap" "T"
+			slot "Hold" "LShift" "SHIFT"
+		}
+		bind "indexB3.L" {
+			slot "Tap" "D"
+		}
+		bind "middle1.L" {
+			slot "Tap" "F"
+		}
+		bind "middle2.L" {
+			slot "Tap" "S"
+			slot "Hold" "F9" "NAV" layer="nav" // f23
+		}
+		bind "middle3.L" {
+			slot "Tap" "C"
+		}
+		bind "ring1.L" {
+			slot "Tap" "W"
+		}
+		bind "ring2.L" {
+			slot "Tap" "R"
+		}
+		bind "ring3.L" {
+			slot "Tap" "X"
+		}
+		bind "pinky1.L" {
+			slot "Tap" "Q"
+		}
+		bind "pinky2.L"  {
+			slot "Tap" "A"
+		}
+		bind "pinky3.L"  {
+			slot "Tap" "Z"
+		}
 
-		bind "thumbA.R"  (MDI)"keyboard-return" hold=(Layer)"NUM"
-		bind "thumbB.R"  "ESC"
-		bind "indexA1.R" "j"
-		bind "indexA2.R" "m" hold="."
-		bind "indexA3.R" "k" hold=":"
-		bind "indexB1.R" "l" hold=";"
-		bind "indexB2.R" "n" hold="SHIFT"
-		bind "indexB3.R" "h"
-		bind "middle1.R" "u"
-		bind "middle2.R" "e" hold="_"
-		bind "middle3.R" ","
-		bind "ring1.R"   "y"
-		bind "ring2.R"   "i"
-		bind "ring3.R"   ""
-		bind "pinky1.R"  ""
-		bind "pinky2.R"  "o"
-		bind "pinky3.R"  ""
-
+		bind "thumbA.R" {
+			slot "Tap" "Enter" (IconBootstrap)"arrow-return-left"
+			slot "Hold" "F11" "NUM" layer="number" // f21
+		}
+		bind "thumbB.R" {
+			slot "Tap" "Escape" (IconBootstrap)"escape"
+		}
+		bind "indexA1.R" {
+			slot "Tap" "J"
+		}
+		bind "indexA2.R" {
+			slot "Tap" "M"
+			slot "Hold" "."
+		}
+		bind "indexA3.R" {
+			slot "Tap" "K"
+			slot "Hold" ":"
+		}
+		bind "indexB1.R" {
+			slot "Tap" "L"
+			slot "Hold" ";"
+		}
+		bind "indexB2.R" {
+			slot "Tap" "N"
+			slot "Hold" "RShift" "SHIFT"
+		}
+		bind "indexB3.R" {
+			slot "Tap" "H"
+		}
+		bind "middle1.R" {
+			slot "Tap" "U"
+		}
+		bind "middle2.R" {
+			slot "Tap" "E"
+			slot "Hold" "_"
+		}
+		bind "middle3.R" {
+			slot "Tap" ","
+		}
+		bind "ring1.R" {
+			slot "Tap" "Y"
+		}
+		bind "ring2.R" {
+			slot "Tap" "I"
+		}
+		bind "ring3.R"
+		bind "pinky1.R"
+		bind "pinky2.R" {
+			slot "Tap" "O"
+		}
+		bind "pinky3.R"
 	}
 	layer "number" {
-		bind  "thumbA.L" "0"
-		bind  "thumbB.L" ""
-		bind "indexA1.L" ""
-		bind "indexA2.L" ""
-		bind "indexA3.L" ""
-		bind "indexB1.L" "6"
-		bind "indexB2.L" "3"
-		bind "indexB3.L" "9"
-		bind "middle1.L" "5"
-		bind "middle2.L" "2"
-		bind "middle3.L" "8"
-		bind   "ring1.L" "4"
-		bind   "ring2.L" "1"
-		bind   "ring3.L" "7"
-		bind  "pinky1.L" ""
-		bind  "pinky2.L" "."
-		bind  "pinky3.L" ""
+		bind "thumbA.L" {
+			slot "Tap" "0"
+		}
+		bind "thumbB.L"
+		bind "indexA1.L"
+		bind "indexA2.L"
+		bind "indexA3.L"
+		bind "indexB1.L" {
+			slot "Tap" "6"
+		}
+		bind "indexB2.L" {
+			slot "Tap" "3"
+		}
+		bind "indexB3.L" {
+			slot "Tap" "9"
+		}
+		bind "middle1.L" {
+			slot "Tap" "5"
+		}
+		bind "middle2.L" {
+			slot "Tap" "2"
+		}
+		bind "middle3.L" {
+			slot "Tap" "8"
+		}
+		bind "ring1.L" {
+			slot "Tap" "4"
+		}
+		bind "ring2.L" {
+			slot "Tap" "1"
+		}
+		bind "ring3.L" {
+			slot "Tap" "7"
+		}
+		bind "pinky1.L"
+		bind "pinky2.L" {
+			slot "Tap" "."
+		}
+		bind "pinky3.L"
 
-		bind  "thumbA.R" (Layer)"NUM"
-		bind  "thumbB.R" ""
-		bind "indexA1.R" "F10"
-		bind "indexA2.R" "F11"
-		bind "indexA3.R" "F12"
-		bind "indexB1.R" "F6"
-		bind "indexB2.R" "F3"
-		bind "indexB3.R" "F9"
-		bind "middle1.R" "F5"
-		bind "middle2.R" "F2"
-		bind "middle3.R" "F8"
-		bind   "ring1.R" "F4"
-		bind   "ring2.R" "F1"
-		bind   "ring3.R" "F7"
-		bind  "pinky1.R" ""
-		bind  "pinky2.R" ""
-		bind  "pinky3.R" ""
+		//bind "thumbA.R"
+		bind "thumbB.R"
+		bind "indexA1.R" {
+			slot "Tap" "F10"
+		}
+		bind "indexA2.R" {
+			slot "Tap" "F11"
+		}
+		bind "indexA3.R" {
+			slot "Tap" "F12"
+		}
+		bind "indexB1.R" {
+			slot "Tap" "F4"
+		}
+		bind "indexB2.R" {
+			slot "Tap" "F1"
+		}
+		bind "indexB3.R" {
+			slot "Tap" "F7"
+		}
+		bind "middle1.R" {
+			slot "Tap" "F5"
+		}
+		bind "middle2.R" {
+			slot "Tap" "F2"
+		}
+		bind "middle3.R" {
+			slot "Tap" "F8"
+		}
+		bind "ring1.R" {
+			slot "Tap" "F6"
+		}
+		bind "ring2.R" {
+			slot "Tap" "F3"
+		}
+		bind "ring3.R" {
+			slot "Tap" "F9"
+		}
+		bind "pinky1.R"
+		bind "pinky2.R"
+		bind "pinky3.R"
 	}
 	layer "symbol" {
-		bind "thumbA.L"  (Layer)"SYM"
-		bind "thumbB.L"  ""
-		bind "indexA1.L" "."
-		bind "indexA2.L" "#"
-		bind "indexA3.L" ""
-		bind "indexB1.L" "\""
-		bind "indexB2.L" "="
-		bind "indexB3.L" "\\"
-		bind "middle1.L" ">"
-		bind "middle2.L" "+"
-		bind "middle3.L" "*"
-		bind "ring1.L"   "<"
-		bind "ring2.L"   "-"
-		bind "ring3.L"   "/"
-		bind "pinky1.L"  "'"
-		bind "pinky2.L"  "!"
-		bind "pinky3.L"  "^"
+		//bind "thumbA.L"
+		bind "thumbB.L"
+		bind "indexA1.L" {
+			slot "Tap" "."
+		}
+		bind "indexA2.L" {
+			slot "Tap" "#"
+		}
+		bind "indexA3.L" {
+			slot "Tap" "^"
+		}
+		bind "indexB1.L" {
+			slot "Tap" "\""
+		}
+		bind "indexB2.L" {
+			slot "Tap" "="
+		}
+		bind "indexB3.L" {
+			slot "Tap" "\\"
+		}
+		bind "middle1.L" {
+			slot "Tap" ">"
+		}
+		bind "middle2.L" {
+			slot "Tap" "+"
+		}
+		bind "middle3.L" {
+			slot "Tap" "*"
+		}
+		bind "ring1.L" {
+			slot "Tap" "<"
+		}
+		bind "ring2.L" {
+			slot "Tap" "-"
+		}
+		bind "ring3.L" {
+			slot "Tap" "/"
+		}
+		bind "pinky1.L" {
+			slot "Tap" "'"
+		}
+		bind "pinky2.L" {
+			slot "Tap" "!"
+		}
+		bind "pinky3.L"
 
-		bind "thumbA.R"  ""
-		bind "thumbB.R"  "`"
-		bind "indexA1.R" "&"
-		bind "indexA2.R" "|"
-		bind "indexA3.R" "~"
-		bind "indexB1.R" ":"
-		bind "indexB2.R" ";"
-		bind "indexB3.R" "$"
-		bind "middle1.R" "["
-		bind "middle2.R" "("
-		bind "middle3.R" "{"
-		bind "ring1.R"   "]"
-		bind "ring2.R"   ")"
-		bind "ring3.R"   "}"
-		bind "pinky1.R"  "%"
-		bind "pinky2.R"  "?"
-		bind "pinky3.R"  "@"
+		bind "thumbA.R"
+		bind "thumbB.R" {
+			slot "Tap" "`"
+		}
+		bind "indexA1.R" {
+			slot "Tap" "&"
+		}
+		bind "indexA2.R" {
+			slot "Tap" "|"
+		}
+		bind "indexA3.R" {
+			slot "Tap" "~"
+		}
+		bind "indexB1.R" {
+			slot "Tap" ":"
+		}
+		bind "indexB2.R" {
+			slot "Tap" ";"
+		}
+		bind "indexB3.R" {
+			slot "Tap" "$"
+		}
+		bind "middle1.R" {
+			slot "Tap" "["
+		}
+		bind "middle2.R" {
+			slot "Tap" "("
+		}
+		bind "middle3.R" {
+			slot "Tap" "{"
+		}
+		bind "ring1.R" {
+			slot "Tap" "]"
+		}
+		bind "ring2.R" {
+			slot "Tap" ")"
+		}
+		bind "ring3.R" {
+			slot "Tap" "}"
+		}
+		bind "pinky1.R" {
+			slot "Tap" "%"
+		}
+		bind "pinky2.R" {
+			slot "Tap" "?"
+		}
+		bind "pinky3.R" {
+			slot "Tap" "@"
+		}
 
 	}
 	layer "nav" {
-		bind "thumbA.L"  ""
-		bind "thumbB.L"  ""
-		bind "indexA1.L" (MDI)"volume-plus"
-		bind "indexA2.L" (MDI)"volume-mute"
-		bind "indexA3.L" (MDI)"volume-minus"
-		bind "indexB1.L" (MDI)"skip-previous"
-		bind "indexB2.L" (MDI)"play-pause"
-		bind "indexB3.L" (MDI)"skip-next"
-		bind "middle1.L" ""
-		bind "middle2.L" (Layer)"NAV"
-		bind "middle3.L" ""
-		bind "ring1.L"   ""
-		bind "ring2.L"   ""
-		bind "ring3.L"   ""
-		bind "pinky1.L"  ""
-		bind "pinky2.L"  ""
-		bind "pinky3.L"  ""
+		bind "thumbA.L"
+		bind "thumbB.L"
+		bind "indexA1.L" {
+			slot "Tap" "AudioVolumeUp" (IconBootstrap)"volume-up-fill"
+		}
+		bind "indexA2.L" {
+			slot "Tap" "AudioVolumeMute" (IconBootstrap)"volume-mute-fill"
+		}
+		bind "indexA3.L" {
+			slot "Tap" "AudioVolumeDown" (IconBootstrap)"volume-down-fill"
+		}
+		bind "indexB1.L" {
+			slot "Tap" "MediaTrackNext" (IconBootstrap)"skip-end-fill"
+		}
+		bind "indexB2.L" {
+			slot "Tap" "MediaPlayPause" (IconCustom)"play-pause"
+		}
+		bind "indexB3.L" {
+			slot "Tap" "MediaTrackPrevious" (IconBootstrap)"skip-start-fill"
+		}
+		bind "middle1.L"
+		//bind "middle2.L"
+		bind "middle3.L"
+		bind "ring1.L"
+		bind "ring2.L"
+		bind "ring3.L"
+		bind "pinky1.L"
+		bind "pinky2.L"
+		bind "pinky3.L"
 
-		bind "thumbA.R"  "CTRL"
-		bind "thumbB.R"  ""
-		bind "indexA1.R" (MDI)"monitor-screenshot"
-		bind "indexA2.R" (MDI)"pause-octagon-outline"
-		bind "indexA3.R" ""
-		bind "indexB1.R" ""
-		bind "indexB2.R" (MDI)"arrow-left-thick" hold=(MDI)"arrow-collapse-left"
-		bind "indexB3.R" ""
-		bind "middle1.R" (MDI)"arrow-up-thick" hold=(MDI)"arrow-collapse-up"
-		bind "middle2.R" (MDI)"arrow-down-thick" hold=(MDI)"arrow-collapse-down"
-		bind "middle3.R" ""
-		bind "ring1.R"   ""
-		bind "ring2.R"   (MDI)"arrow-right-thick" hold=(MDI)"arrow-collapse-right"
-		bind "ring3.R"   ""
-		bind "pinky1.R"  ""
-		bind "pinky2.R"  ""
-		bind "pinky3.R"  ""
+		bind "thumbA.R"
+		bind "thumbB.R" {
+			slot "Tap" "RControl" "CTRL"
+		}
+		bind "indexA1.R" {
+			slot "Tap" "PrintScreen" (IconBootstrap)"display"
+		}
+		bind "indexA2.R" {
+			slot "Tap" "Pause" (IconBootstrap)"x-circle"
+		}
+		bind "indexA3.R"
+		bind "indexB1.R"
+		bind "indexB2.R" {
+			slot "Tap" "ArrowLeft" (IconBootstrap)"arrow-left"
+			slot "Hold" "Home" (IconBootstrap)"box-arrow-left"
+		}
+		bind "indexB3.R"
+		bind "middle1.R" {
+			slot "Tap" "ArrowUp" (IconBootstrap)"arrow-up"
+			slot "Hold" "PageUp" (IconBootstrap)"box-arrow-up"
+		}
+		bind "middle2.R" {
+			slot "Tap" "ArrowDown" (IconBootstrap)"arrow-down"
+			slot "Hold" "PageDown" (IconBootstrap)"box-arrow-down"
+		}
+		bind "middle3.R"
+		bind "ring1.R"
+		bind "ring2.R" {
+			slot "Tap" "ArrowRight" (IconBootstrap)"arrow-right"
+			slot "Hold" "End" (IconBootstrap)"box-arrow-right"
+		}
+		bind "ring3.R"
+		bind "pinky1.R"
+		bind "pinky2.R"
+		bind "pinky3.R"
 
 	}
 }
