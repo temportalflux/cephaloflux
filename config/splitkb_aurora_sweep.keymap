@@ -209,9 +209,9 @@ Behaviors (https://zmk.dev/docs/behaviors)
             */
             bindings = <
                 &kp Q   &kp W   &kp F      &kp P        &kp B  /**/ &kp J       &mt SEMI L  &kp U       &kp Y   &none
-                &kp A   &kp R   &ltnav S   &mt LSHFT T  &kp G  /**/ &mt DOT M   &mt RSHFT N &mt UNDER E &kp I   &kp O
+                &kp A   &kp R   &lt NAV S   &mt LSHFT T  &kp G  /**/ &mt DOT M   &mt RSHFT N &mt UNDER E &kp I   &kp O
                 &kp Z   &kp X   &kp C      &kp D        &kp V  /**/ &mt COLON K &kp H       &kp COMMA   &kp DOT &none
-                                &mt DEL BSPC     &ltsym SPACE  /**/ &ltnum RET  &kp ESC
+                                &mt DEL BSPC     &lt SYM SPACE  /**/ &lt NUM RET  &kp ESC
             >;
         };
 
