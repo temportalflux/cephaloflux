@@ -75,6 +75,10 @@ Behaviors (https://zmk.dev/docs/behaviors)
 #define NAV 3 // TODO: Macro to Hold F23
 
 /* TODO
+    ctrl+a too odd
+    no repeat backspace
+    alt+tab -> left/right -> enter
+
     Num & Scroll Lock; not present
     Layer Tap Toggle to gaming bindings
     Insert toggle not present
