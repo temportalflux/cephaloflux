@@ -116,12 +116,10 @@ Behaviors (https://zmk.dev/docs/behaviors)
             #binding-cells = <2>;
             bindings
                 = <&macro_param_1to1>
-                , <&macro_press &mo MACRO_PLACEHOLDER>
-                , <&macro_press &kp F22>
+                , <&macro_press &mo MACRO_PLACEHOLDER &kp F22>
                 , <&macro_pause_for_release>
-                , <&macro_release &kp F22>
                 , <&macro_param_1to1>
-                , <&macro_release &mo MACRO_PLACEHOLDER>
+                , <&macro_release &mo MACRO_PLACEHOLDER &kp F22>
                 ;
         };
         lhf23: layer_hold_f23 {
