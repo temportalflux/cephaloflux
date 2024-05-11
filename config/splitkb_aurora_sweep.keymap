@@ -92,6 +92,67 @@ Behaviors (https://zmk.dev/docs/behaviors)
     20:pinky3.L 21:ring3.L 22:middle3.L 23:indexB3.L 24:indexA3.L | 25:indexA3.R 26:indexB3.R 27:middle3.R 28:ring3.R 29:pinky3.R
                                         30:thumbB.L  31:thumbA.L  | 32:thumbA.R  33:thumbB.R
     */
+    macros {
+        lhnum: layer_hold_num {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &mo NUM>
+                , <&macro_press &kp F21>
+                , <&macro_pause_for_release>
+                , <&macro_release &kp F21>
+                , <&macro_release &mo NUM>
+                ;
+        };
+        lhsym: layer_hold_sym {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &mo SYM>
+                , <&macro_press &kp F22>
+                , <&macro_pause_for_release>
+                , <&macro_release &kp F22>
+                , <&macro_release &mo SYM>
+                ;
+        };
+        lhnav: layer_hold_nav {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &mo NAV>
+                , <&macro_press &kp F23>
+                , <&macro_pause_for_release>
+                , <&macro_release &kp F23>
+                , <&macro_release &mo NAV>
+                ;
+        };
+    };
+    behaviors {
+        ltnum: layer-tap-signaled-num {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            bindings = <&lhnum>, <&kp>;
+        };
+        ltsym: layer-tap-signaled-sym {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            bindings = <&lhsym>, <&kp>;
+        };
+        ltnav: layer-tap-signaled-nav {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            bindings = <&lhnav>, <&kp>;
+        };
+    };
 
     combos {
         compatible = "zmk,combos";
@@ -148,9 +209,9 @@ Behaviors (https://zmk.dev/docs/behaviors)
             */
             bindings = <
                 &kp Q   &kp W   &kp F      &kp P        &kp B  /**/ &kp J       &mt SEMI L  &kp U       &kp Y   &none
-                &kp A   &kp R   &lt NAV S  &mt LSHFT T  &kp G  /**/ &mt DOT M   &mt RSHFT N &mt UNDER E &kp I   &kp O
+                &kp A   &kp R   &ltnav S   &mt LSHFT T  &kp G  /**/ &mt DOT M   &mt RSHFT N &mt UNDER E &kp I   &kp O
                 &kp Z   &kp X   &kp C      &kp D        &kp V  /**/ &mt COLON K &kp H       &kp COMMA   &kp DOT &none
-                                &mt DEL BSPC     &lt SYM SPACE /**/ &lt NUM RET &kp ESC
+                                &mt DEL BSPC     &ltsym SPACE  /**/ &ltnum RET  &kp ESC
             >;
         };
 
