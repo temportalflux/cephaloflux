@@ -100,42 +100,48 @@ Behaviors (https://zmk.dev/docs/behaviors)
                                         30:thumbB.L  31:thumbA.L  | 32:thumbA.R  33:thumbB.R
     */
     macros {
-        lhnum: layer_hold_num {
+        lhf21: layer_hold_f21 {
             compatible = "zmk,behavior-macro-two-param";
             #binding-cells = <2>;
             bindings
-                = <&macro_press &mo NUM>
+                = <&macro_param_1to1>
+                , <&macro_press &mo MACRO_PLACEHOLDER>
                 , <&macro_press &kp F21>
                 , <&macro_pause_for_release>
                 , <&macro_release &kp F21>
-                , <&macro_release &mo NUM>
+                , <&macro_param_1to1>
+                , <&macro_release &mo MACRO_PLACEHOLDER>
                 ;
         };
-        lhsym: layer_hold_sym {
+        lhf22: layer_hold_f22 {
             compatible = "zmk,behavior-macro-two-param";
             #binding-cells = <2>;
             bindings
-                = <&macro_press &mo SYM>
+                = <&macro_param_1to1>
+                , <&macro_press &mo MACRO_PLACEHOLDER>
                 , <&macro_press &kp F22>
                 , <&macro_pause_for_release>
                 , <&macro_release &kp F22>
-                , <&macro_release &mo SYM>
+                , <&macro_param_1to1>
+                , <&macro_release &mo MACRO_PLACEHOLDER>
                 ;
         };
-        lhnav: layer_hold_nav {
+        lhf23: layer_hold_f23 {
             compatible = "zmk,behavior-macro-two-param";
             #binding-cells = <2>;
             bindings
-                = <&macro_press &mo NAV>
+                = <&macro_param_1to1>
+                , <&macro_press &mo MACRO_PLACEHOLDER>
                 , <&macro_press &kp F23>
                 , <&macro_pause_for_release>
                 , <&macro_release &kp F23>
-                , <&macro_release &mo NAV>
+                , <&macro_param_1to1>
+                , <&macro_release &mo MACRO_PLACEHOLDER>
                 ;
         };
     };
     behaviors {
-        ltnum: layer-tap-signaled-num {
+        ltf21: layer-tap-signaled-f21 {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
@@ -143,7 +149,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
             quick-tap-ms = <200>;
             bindings = <&lhnum>, <&kp>;
         };
-        ltsym: layer-tap-signaled-sym {
+        ltf22: layer-tap-signaled-f22 {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
@@ -151,7 +157,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
             quick-tap-ms = <200>;
             bindings = <&lhsym>, <&kp>;
         };
-        ltnav: layer-tap-signaled-nav {
+        ltf23: layer-tap-signaled-f23 {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
@@ -215,10 +221,10 @@ Behaviors (https://zmk.dev/docs/behaviors)
                               | BKSpace / Delete |   Space/L2  ||||  Enter/L1  |  Escape   |
             */
             bindings = <
-                &kp Q   &kp W   &kp F      &kp P        &kp B  /**/ &kp J       &mt SEMI L  &kp U       &kp Y   &none
-                &kp A   &kp R   &ltnav S   &mt LSHFT T  &kp G /**/ &mt DOT M   &mt RSHFT N &mt UNDER E &kp I   &kp O
-                &kp Z   &kp X   &kp C      &kp D        &kp V  /**/ &mt COLON K &kp H       &kp COMMA   &none   &none
-                                &mt DEL BSPC     &lt SYM SPACE /**/ &lt NUM RET  &kp ESC
+                &kp Q   &kp W   &kp F        &kp P        &kp B  /**/ &kp J       &mt SEMI L  &kp U       &kp Y   &none
+                &kp A   &kp R   &ltf23 NAV S &mt LSHFT T  &kp G  /**/ &mt DOT M   &mt RSHFT N &mt UNDER E &kp I   &kp O
+                &kp Z   &kp X   &kp C        &kp D        &kp V  /**/ &mt COLON K &kp H       &kp COMMA   &none   &none
+                                &mt DEL BSPC &lt SYM SPACE       /**/ &lt NUM RET  &kp ESC
             >;
         };
 
