@@ -70,14 +70,39 @@ Behaviors (https://zmk.dev/docs/behaviors)
 
 #define DEFAULT 0
 #define ALPHA 0
-#define NUM 1 // TODO: Macro to Hold F21
-#define SYM 2 // TODO: Macro to Hold F22
-#define NAV 3 // TODO: Macro to Hold F23
+#define NUM 1
+#define SYM 2
+#define NAV 3
+#define SYS 4
+#define GAME1 5
+#define GAME2 6
 
 /* TODO
-    ctrl+a too odd
+    Combos:
+        Tab (move)
+        Ctrl+A
+        Ctrl+C (copy)
+        Ctrl+X (cut)
+        Ctrl+V (paste)
+        Ctrl+T (tab)
+        Ctrl+S (save)
+        Ctrl+Shift+*
+        can put Ctrl on R (ring2.L)
+    Possible Combos:
+        QW - ESC
+        WF - Ctrl+F
+        WFP - Ctrl+Shift+F
+        ZX - Ctrl
+        XC - Alt
+        ZXC - Ctrl+Alt
+
+    System control layer
     no repeat backspace
     alt+tab -> left/right -> enter
+    
+    change default behavior; currently if I start pressing key 1 w/ a hold behavior and also press another key 2
+    before the hold-behavior threshold, the hold binding is activated on key 1 instead of the tap. I want to
+    interrupt a hold to process the tap behavior.
 
     Num & Scroll Lock; not present
     Layer Tap Toggle to gaming bindings
@@ -88,6 +113,8 @@ Behaviors (https://zmk.dev/docs/behaviors)
     Combos (label + background at pos, w/ connecting lines to bound keys)
 */
 
+// Aurora Sweep doesn't use backlight feature, instead all LEDs (under board and under each key) are individually accessible.
+// There are 6 under the board and 17 under-keys (this is per side).
 &led_strip {
     chain-length = <23>;
 };
@@ -98,10 +125,15 @@ Behaviors (https://zmk.dev/docs/behaviors)
     };
 
     /* LAYOUT
-    00:pinky1.L 01:ring1.L 02:middle1.L 03:indexB1.L 04:indexA1.L | 05:indexA1.R 06:indexB1.R 07:middle1.R 08:ring1.R 09:pinky1.R
-    10:pinky2.L 11:ring2.L 12:middle2.L 13:indexB2.L 14:indexA2.L | 15:indexA2.R 16:indexB2.R 17:middle2.R 18:ring2.R 19:pinky2.R
-    20:pinky3.L 21:ring3.L 22:middle3.L 23:indexB3.L 24:indexA3.L | 25:indexA3.R 26:indexB3.R 27:middle3.R 28:ring3.R 29:pinky3.R
-                                        30:thumbB.L  31:thumbA.L  | 32:thumbA.R  33:thumbB.R
+    //╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
+          00:pinky1.L      01:ring1.L      02:middle1.L    03:indexB1.L     04:indexA1.L       05:indexA1.R     06:indexB1.R     07:middle1.R      08:ring1.R      09:pinky1.R
+    //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+          10:pinky2.L      11:ring2.L      12:middle2.L    13:indexB2.L     14:indexA2.L       15:indexA2.R     16:indexB2.R     17:middle2.R      18:ring2.R      19:pinky2.R
+    //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+          20:pinky3.L      21:ring3.L      22:middle3.L    23:indexB3.L     24:indexA3.L       25:indexA3.R     26:indexB3.R     27:middle3.R      28:ring3.R      29:pinky3.R
+    //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+                                                           30:thumbB.L      31:thumbA.L        32:thumbA.R      33:thumbB.R
+    //┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚
     */
     macros {
         lhf21: layer_hold_f21 {
@@ -212,81 +244,124 @@ Behaviors (https://zmk.dev/docs/behaviors)
 
         // 0: Default/Alpha
         alpha_layer {
-            /*
-                |  Q  |   W   |     F     |      P     |   B   ||||     J      |   L/;     |     U     |   Y    |       |
-                |  A  |   R   |    S/L3   |   T/SHIFT  |   G   ||||    M/.     |  N/SHIFT  |    E/_    |   I    |   O   |
-                |  Z  |   X   |     C     |      D     |   V   ||||    K/:     |    H      |     ,     |        |       |
-                              | BKSpace / Delete |   Space/L2  ||||  Enter/L1  |  Escape   |
-            */
             bindings = <
-                &kp Q   &kp W   &kp F        &kp P        &kp B  /**/ &kp J           &mt SEMI L  &kp U       &kp Y   &none
-                &kp A   &kp R   &ltf23 NAV S &mt LSHFT T  &kp G  /**/ &mt DOT M       &mt RSHFT N &mt UNDER E &kp I   &kp O
-                &kp Z   &kp X   &kp C        &kp D        &kp V  /**/ &mt COLON K     &kp H       &kp COMMA   &none   &none
-                                &mt DEL BSPC &ltf22 SYM SPACE    /**/ &ltf21 NUM RET  &kp ESC
+        //╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
+            &kp Q           &kp W            &kp F            &kp P            &kp B             &kp J            &mt SEMI L       &kp U            &kp Y            &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+            &kp A           &kp R            &ltf23 NAV S     &mt LSHFT T      &kp G             &mt DOT M        &mt RSHFT N      &mt UNDER E      &kp I            &kp O
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+            &kp Z           &kp X            &kp C            &kp D            &kp V             &mt COLON K      &kp H            &kp COMMA        &none            &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+                                                              &mt DEL BSPC    &ltf22 SYM SPACE   &ltf21 NUM RET   &kp ESC
+        //┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚
             >;
         };
 
         // 1: Numbers & Function
         number_layer {
-            /*
-                |       |   4   |   5   |   6   |       ||||  F10   |   F4   |   F5  |   F6  |      |
-                |   .   |   1   |   2   |   3   |       ||||  F11   |   F1   |   F2  |   F3  |      |
-                |       |   7   |   8   |   9   |       ||||  F12   |   F7   |   F8  |   F9  |      |
-                                        |       |   0   |||| LAYER  |        |
-            */
             bindings = <
-                &none    &kp N4  &kp N5  &kp N6  &none  /**/ &kp F10  &kp F4  &kp F5  &kp F6  &none
-                &kp DOT  &kp N1  &kp N2  &kp N3  &none  /**/ &kp F11  &kp F1  &kp F2  &kp F3  &none
-                &none    &kp N7  &kp N8  &kp N9  &none  /**/ &kp F12  &kp F7  &kp F8  &kp F9  &none
-                                         &none   &kp N0 /**/ &none    &none
+        //╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
+            &none           &kp N4           &kp N5           &kp N6           &none             &kp F10          &kp F4           &kp F5           &kp F6           &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+            &kp DOT         &kp N1           &kp N2           &kp N3           &none             &kp F11          &kp F1           &kp F2           &kp F3           &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+            &none           &kp N7           &kp N8           &kp N9           &none             &kp F12          &kp F7           &kp F8           &kp F9           &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+                                                              &none            &kp N0            &none            &none
+        //┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚
             >; 
         };
 
         // 2: Symbols
         symbol_layer {
-            /*
-                |    '   |    <    |    >   |    "    |    .     ||||    &     |     :    |    [   |    ]   |    %      |
-                |    !   |    -    |    +   |    =    |    #     ||||    |     |     ;    |    (   |    )   |    ?      |
-                |        |    /    |    *   |    \    |    ^     ||||    ~     |     $    |    {   |    }   |    @      |
-                                            |         |   LAYER  ||||          |     `    |
-            */
             bindings = <
-                &kp SQT   &kp LT    &kp GT   &kp DQT   &kp DOT   /**/ &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp PERCENT
-                &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL &kp HASH  /**/ &kp PIPE  &kp SEMI   &kp LPAR &kp RPAR &kp QMARK
-                &none     &kp FSLH  &kp STAR &kp BSLH  &kp CARET /**/ &kp TILDE &kp DOLLAR &mt RBRC LBRC &kp RBRC &kp AT
-                                             &none     &none     /**/ &none     &kp GRAVE
+        //╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
+            &kp SQT         &kp LT           &kp GT           &kp DQT          &kp DOT           &kp AMPS         &kp COLON        &kp LBKT         &kp RBKT        &kp PERCENT
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+            &kp EXCL        &kp MINUS        &kp PLUS         &kp EQUAL        &kp HASH          &kp PIPE         &kp SEMI         &kp LPAR         &kp RPAR        &kp QMARK
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+            &none           &kp FSLH         &kp STAR         &kp BSLH         &kp CARET         &kp TILDE        &kp DOLLAR       &mt RBRC LBRC    &kp RBRC        &kp AT
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+                                                              &none            &none             &none            &kp GRAVE
+        //┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚
             >;
         };
 
         // 3: Navigation
         nav_layer {
-            /*  
-                |            | |       |      Next      |     VUp     ||||   PrintScreen  |             |  ↑/Page Up   |             |            |
-                | BootLoader | | LAYER |      Play      |    Mute     ||||   Pause Break  |   ←/Home    | ↓/Page Down  |    →/End    | BootLoader |
-                | Sys Reset  | |       |      Prev      |    VDown    ||||                |             |              |             | Sys Reset  |
-                                       |                |             ||||       Ctrl     |             |
-            */
             bindings = <
-                &bt BT_CLR  &none &none    &kp C_NEXT       &kp C_VOL_UP /**/ &kp PSCRN       &none           &mt PG_UP UP   &none         &rgb_ug RGB_TOG
-                &bootloader	&none &none    &kp C_PLAY_PAUSE &kp C_MUTE   /**/ &kp PAUSE_BREAK &mt HOME LEFT   &mt PG_DN DOWN &mt END RIGHT &bootloader
-                &sys_reset  &none &none    &kp C_PREV       &kp C_VOL_DN /**/ &rgb_ug RGB_BRD &rgb_ug RGB_BRI &none          &none         &sys_reset
-                                           &none            &none        /**/ &kp RCTRL       &none
+        //╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
+            &bt BT_CLR      &none            &none            &kp C_NEXT       &kp C_VOL_UP      &kp PSCRN        &none            &mt PG_UP UP     &none            &rgb_ug RGB_TOG
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+            &bootloader	    &none            &none            &kp C_PLAY_PAUSE &kp C_MUTE        &kp PAUSE_BREAK  &mt HOME LEFT    &mt PG_DN DOWN   &mt END RIGHT    &bootloader
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+            &sys_reset      &none            &none            &kp C_PREV       &kp C_VOL_DN      &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &none            &none            &sys_reset
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+                                                              &none            &kp RCTRL         &none            &none
+        //┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚
             >;
         };
 
-        /* TODO: gaming layer
-            QWERTY left hand + num row
-            Arrow Keys?
-            Tab, Shift, Space
-        */
-        //gaming_layer {
-            /*
-            |   Q   |   W   |   E   |   R   |   T   ||   Y   |   I   |   O   |   P   |       |
-            |   A   |   S   |   D   |   F   |   G   ||   H   |   J   |   K   |   L   |       |
-            |   Z   |   X   |   C   |   V   |   B   ||   N   |   M   |   ,   |   .   |       |
-                                    |       |       ||       |       |
-            */
-        //};
+        // 4: System
+        sys_layer {
+            bindings = <
+        //╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
+            &none           &none            &none            &none            &none             &none            &none            &none            &none            &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+            &none           &none            &none            &none            &none             &none            &none            &none            &none            &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+            &none           &none            &none            &none            &none             &none            &none            &none            &none            &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+                                                              &none            &none             &none            &none
+        //┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚
+            >;
+        }
+
+        // 5: Game p.1
+        // TODO: Combo to enter mode
+        // TODO: Combo to exit mode
+        game1_layer {
+            bindings = <
+        //╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
+            &none           &kp Y            &kp W            &kp E            &kp L             &none            &none            &none            &none            &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+            &kp LSHIFT      &kp A            &kp S            &kp D            &kp F             &none            &none            &none            &none            &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+            &none           &none            &none            &none            &none             &none            &none            &none            &none            &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+                                                              &lt GAME2 &LCTRL &kp SPACE         &none            &none
+        //┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚
+            >;
+        }
+
+        // 6: Game p.2
+        game2_layer {
+            bindings = <
+        //╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
+            &none           &kp N4           &kp N5           &kp N6           &kp N0            &none            &none            &none            &none            &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+            &none           &kp N1           &kp N2           &kp N3           &kp MINUS         &none            &none            &none            &none            &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+            &none           &kp N7           &kp N8           &kp N9           &kp EQUAL         &none            &none            &none            &none            &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+                                                              &trans           &none             &none            &none
+        //┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚
+            >;
+        }
+
+        empty_layer {
+            bindings = <
+        //╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
+            &none           &none            &none            &none            &none             &none            &none            &none            &none            &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+            &none           &none            &none            &none            &none             &none            &none            &none            &none            &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+            &none           &none            &none            &none            &none             &none            &none            &none            &none            &none
+        //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+                                                              &none            &none             &none            &none
+        //┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚
+            >;
+        }
 
     };
 };
