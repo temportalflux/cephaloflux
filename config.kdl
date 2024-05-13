@@ -85,6 +85,7 @@ layout {
 		}
 		bind "indexA3.L" {
 			slot "Tap" "V"
+			slot "Hold" "LControl+V" "paste"
 		}
 		bind "indexB1.L" {
 			slot "Tap" "P"
@@ -105,15 +106,18 @@ layout {
 		}
 		bind "middle3.L" {
 			slot "Tap" "C"
+			slot "Hold" "LControl+C" "copy"
 		}
 		bind "ring1.L" {
 			slot "Tap" "W"
 		}
 		bind "ring2.L" {
 			slot "Tap" "R"
+			slot "Hold" "LControl" "CTRL"
 		}
 		bind "ring3.L" {
 			slot "Tap" "X"
+			slot "Hold" "LControl+X" "cut"
 		}
 		bind "pinky1.L" {
 			slot "Tap" "Q"

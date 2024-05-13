@@ -80,14 +80,17 @@ Behaviors (https://zmk.dev/docs/behaviors)
 /* TODO
     Combos:
         Tab (move)
-        Ctrl+A
-        Ctrl+C (copy)
-        Ctrl+X (cut)
-        Ctrl+V (paste)
-        Ctrl+T (tab)
-        Ctrl+S (save)
-        Ctrl+Shift+*
-        can put Ctrl on R (ring2.L)
+        ring2.L: R/Ctrl
+            Ctrl+A
+            Ctrl+C (copy)
+            Ctrl+X (cut) - not currently available, both are on the same finger
+            Ctrl+V (paste)
+            Ctrl+Z (undo)
+            Ctrl+T (tab)
+            Ctrl+S (save)
+            Ctrl+Shift+*
+        Ctrl+Meta+Arrow[L/R] (switch virtual desktops)
+            Nav layer macro for Ctrl+Meta on right thumb?
     Possible Combos:
         QW - ESC
         WF - Ctrl+F
@@ -248,9 +251,9 @@ Behaviors (https://zmk.dev/docs/behaviors)
         //╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
             &kp Q           &kp W            &kp F            &kp P            &kp B             &kp J            &mt SEMI L       &kp U            &kp Y            &none
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
-            &kp A           &kp R            &ltf23 NAV S     &mt LSHFT T      &kp G             &mt DOT M        &mt RSHFT N      &mt UNDER E      &kp I            &kp O
+            &kp A           &mt LCTRL R      &ltf23 NAV S     &mt LSHFT T      &kp G             &mt DOT M        &mt RSHFT N      &mt UNDER E      &kp I            &kp O
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
-            &kp Z           &kp X            &kp C            &kp D            &kp V             &mt COLON K      &kp H            &kp COMMA        &none            &none
+            &kp Z           &mt LC(X) X      &mt LC(C) C      &kp D            &mt LC(V) V       &mt COLON K      &kp H            &kp COMMA        &none            &none
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
                                                               &mt DEL BSPC    &ltf22 SYM SPACE   &ltf21 NUM RET   &kp ESC
         //┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚
@@ -337,7 +340,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
         game1_layer {
             bindings = <
         //╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
-            &none           &kp Y            &kp W            &kp E            &kp L             &none            &none            &none            &none            &none
+            &kp Y           &kp Q            &kp W            &kp E            &kp L             &none            &none            &none            &none            &none
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
             &kp LSHIFT      &kp A            &kp S            &kp D            &kp F             &none            &none            &none            &none            &none
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
