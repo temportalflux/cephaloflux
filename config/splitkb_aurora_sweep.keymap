@@ -78,38 +78,41 @@ Behaviors (https://zmk.dev/docs/behaviors)
 #define GAME2 6
 
 /* TODO
-    Combos:
-        Tab (move)
-        ring2.L: R/Ctrl
-            Ctrl+A
-            Ctrl+C (copy)
-            Ctrl+X (cut) - not currently available, both are on the same finger
-            Ctrl+V (paste)
-            Ctrl+Z (undo)
-            Ctrl+T (tab)
-            Ctrl+S (save)
-            Ctrl+Shift+*
-        Ctrl+Meta+Arrow[L/R] (switch virtual desktops)
-            Nav layer macro for Ctrl+Meta on right thumb?
-    Possible Combos:
-        QW - ESC
-        WF - Ctrl+F
-        WFP - Ctrl+Shift+F
-        ZX - Ctrl
-        XC - Alt
-        ZXC - Ctrl+Alt
+	Combos:
+		Tab (move)
+		ring2.L: R/Ctrl
+			Ctrl+A
+			Ctrl+C (copy)
+			Ctrl+X (cut) - not currently available, both are on the same finger
+			Ctrl+V (paste)
+			Ctrl+Z (undo)
+			Ctrl+T (tab)
+			Ctrl+S (save)
+			Ctrl+D (duplicate or diff)
+			Ctrl+B (Build)
+			Ctrl+Shift+[letter]
+		Ctrl+Shift+Arrow
+		Ctrl+Meta+Arrow[L/R] (switch virtual desktops)
+			Nav layer macro for Ctrl+Meta on right thumb?
+	Possible Combos:
+		QW - ESC
+		WF - Ctrl+F
+		WFP - Ctrl+Shift+F
+		ZX - Ctrl
+		XC - Alt
+		ZXC - Ctrl+Alt
 
-    System control layer
-    no repeat backspace
-    alt+tab -> left/right -> enter
-    
-    change default behavior; currently if I start pressing key 1 w/ a hold behavior and also press another key 2
-    before the hold-behavior threshold, the hold binding is activated on key 1 instead of the tap. I want to
-    interrupt a hold to process the tap behavior.
+	System control layer
+	no repeat backspace
+	alt+tab -> left/right -> enter
+	
+	change default behavior; currently if I start pressing key 1 w/ a hold behavior and also press another key 2
+	before the hold-behavior threshold, the hold binding is activated on key 1 instead of the tap. I want to
+	interrupt a hold to process the tap behavior.
 
-    Num & Scroll Lock; not present
-    Layer Tap Toggle to gaming bindings
-    Insert toggle not present
+	Num & Scroll Lock; not present
+	Layer Tap Toggle to gaming bindings
+	Insert toggle not present
 */
 
 /* Keyboard Overlay Presentation Requirements
@@ -296,11 +299,11 @@ Behaviors (https://zmk.dev/docs/behaviors)
         //╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
             &bt BT_CLR      &none            &none            &kp C_NEXT       &kp C_VOL_UP      &kp PSCRN        &none            &mt PG_UP UP     &none            &rgb_ug RGB_TOG
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
-            &bootloader	    &none            &none            &kp C_PLAY_PAUSE &kp C_MUTE        &kp PAUSE_BREAK  &mt HOME LEFT    &mt PG_DN DOWN   &mt END RIGHT    &bootloader
+            &bootloader	    &none            &trans           &kp C_PLAY_PAUSE &kp C_MUTE        &kp PAUSE_BREAK  &mt HOME LEFT    &mt PG_DN DOWN   &mt END RIGHT    &bootloader
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
             &sys_reset      &none            &none            &kp C_PREV       &kp C_VOL_DN      &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &none            &none            &sys_reset
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
-                                                              &none            &kp RCTRL         &none            &none
+                                                              &none            &kp LSHIFT        &kp RCTRL        &none
         //┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚
             >;
         };
