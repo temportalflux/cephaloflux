@@ -71,7 +71,7 @@ layout {
 	layer "alpha" {
 		bind "thumbA.L" {
 			slot "Tap" "Space" (IconCustom)"space"
-			slot "Hold" "F12" "SYM" layer="symbol" // f22
+			slot "Hold" "F22" "SYM" layer="symbol"
 		}
 		bind "thumbB.L" {
 			slot "Tap" "Backspace" (IconBootstrap)"backspace-fill"
@@ -102,7 +102,7 @@ layout {
 		}
 		bind "middle2.L" {
 			slot "Tap" "S"
-			slot "Hold" "F9" "NAV" layer="nav" // f23
+			slot "Hold" "F23" "NAV" layer="nav"
 		}
 		bind "middle3.L" {
 			slot "Tap" "C"
@@ -131,7 +131,7 @@ layout {
 
 		bind "thumbA.R" {
 			slot "Tap" "Enter" (IconBootstrap)"arrow-return-left"
-			slot "Hold" "F11" "NUM" layer="number" // f21
+			slot "Hold" "F21" "NUM" layer="number"
 		}
 		bind "thumbB.R" {
 			slot "Tap" "Escape" (IconBootstrap)"escape"
@@ -363,7 +363,9 @@ layout {
 
 	}
 	layer "nav" {
-		bind "thumbA.L"
+		bind "thumbA.L" {
+			slot "Tap" "LShift" "SHIFT"
+		}
 		bind "thumbB.L"
 		bind "indexA1.L" {
 			slot "Tap" "AudioVolumeUp" (IconBootstrap)"volume-up-fill"
@@ -393,10 +395,10 @@ layout {
 		bind "pinky2.L"
 		bind "pinky3.L"
 
-		bind "thumbA.R"
-		bind "thumbB.R" {
+		bind "thumbA.R" {
 			slot "Tap" "RControl" "CTRL"
 		}
+		bind "thumbB.R"
 		bind "indexA1.R" {
 			slot "Tap" "PrintScreen" (IconBootstrap)"display"
 		}
@@ -428,6 +430,14 @@ layout {
 		bind "pinky1.R"
 		bind "pinky2.R"
 		bind "pinky3.R"
+	}
+	layer "sys" {
+
+	}
+	layer "game1" {
+
+	}
+	layer "game2" {
 
 	}
 }

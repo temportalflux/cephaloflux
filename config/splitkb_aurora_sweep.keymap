@@ -90,6 +90,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
 			Ctrl+S (save)
 			Ctrl+D (duplicate or diff)
 			Ctrl+B (Build)
+			Ctrl+F (find)
 			Ctrl+Shift+[letter]
 		Ctrl+Shift+Arrow
 		Ctrl+Meta+Arrow[L/R] (switch virtual desktops)
@@ -288,7 +289,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
             &none           &kp FSLH         &kp STAR         &kp BSLH         &kp CARET         &kp TILDE        &kp DOLLAR       &mt RBRC LBRC    &kp RBRC        &kp AT
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
-                                                              &none            &none             &none            &kp GRAVE
+                                                              &none            &trans            &none            &kp GRAVE
         //┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚
             >;
         };
