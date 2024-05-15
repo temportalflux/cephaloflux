@@ -28,9 +28,6 @@ Tab is Bootstrap "indent"
 */
 layout {
 	default_layer "alpha"
-	default_layer "number"
-	default_layer "symbol"
-	default_layer "nav"
 
 	switch "thumbA.L"   40.0 -110.0 side="left"
 	switch "thumbB.L"  100.0 -110.0 side="left"
@@ -92,7 +89,7 @@ layout {
 		}
 		bind "indexB2.L" {
 			slot "Tap" "T"
-			slot "Hold" "LShift" "SHIFT"
+			slot "Hold" "LShift" (IconBootstrap)"shift-fill"
 		}
 		bind "indexB3.L" {
 			slot "Tap" "D"
@@ -113,7 +110,7 @@ layout {
 		}
 		bind "ring2.L" {
 			slot "Tap" "R"
-			slot "Hold" "LControl" "CTRL"
+			slot "Hold" "LControl" (IconBootstrap)"command"
 		}
 		bind "ring3.L" {
 			slot "Tap" "X"
@@ -153,7 +150,7 @@ layout {
 		}
 		bind "indexB2.R" {
 			slot "Tap" "N"
-			slot "Hold" "RShift" "SHIFT"
+			slot "Hold" "RShift" (IconBootstrap)"shift-fill"
 		}
 		bind "indexB3.R" {
 			slot "Tap" "H"
@@ -360,11 +357,10 @@ layout {
 		bind "pinky3.R" {
 			slot "Tap" "@"
 		}
-
 	}
 	layer "nav" {
 		bind "thumbA.L" {
-			slot "Tap" "LShift" "SHIFT"
+			slot "Tap" "LShift" (IconBootstrap)"shift-fill"
 		}
 		bind "thumbB.L"
 		bind "indexA1.L" {
@@ -396,7 +392,7 @@ layout {
 		bind "pinky3.L"
 
 		bind "thumbA.R" {
-			slot "Tap" "RControl" "CTRL"
+			slot "Tap" "RControl" (IconBootstrap)"command"
 		}
 		bind "thumbB.R"
 		bind "indexA1.R" {

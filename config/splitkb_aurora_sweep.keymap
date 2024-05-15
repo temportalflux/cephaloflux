@@ -95,6 +95,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
 		Ctrl+Shift+Arrow
 		Ctrl+Meta+Arrow[L/R] (switch virtual desktops)
 			Nav layer macro for Ctrl+Meta on right thumb?
+	Missing ALT (bootstrap "alt")
 	Possible Combos:
 		QW - ESC
 		WF - Ctrl+F
