@@ -77,48 +77,31 @@ Behaviors (https://zmk.dev/docs/behaviors)
 #define GAME1 5
 #define GAME2 6
 
-/* TODO
-	Combos:
-		Tab (move)
-		ring2.L: R/Ctrl
-			Ctrl+A
-			Ctrl+C (copy)
-			Ctrl+X (cut) - not currently available, both are on the same finger
-			Ctrl+V (paste)
-			Ctrl+Z (undo)
-			Ctrl+T (tab)
-			Ctrl+S (save)
-			Ctrl+D (duplicate or diff)
-			Ctrl+B (Build)
-			Ctrl+F (find)
-			Ctrl+Shift+[letter]
-		Ctrl+Shift+Arrow
-		Ctrl+Meta+Arrow[L/R] (switch virtual desktops)
-			Nav layer macro for Ctrl+Meta on right thumb?
-	Missing ALT (bootstrap "alt")
-	Possible Combos:
-		QW - ESC
-		WF - Ctrl+F
-		WFP - Ctrl+Shift+F
-		ZX - Ctrl
-		XC - Alt
-		ZXC - Ctrl+Alt
-
-	System control layer
-	no repeat backspace
-	alt+tab -> left/right -> enter
-	
+/* NOTES:
 	change default behavior; currently if I start pressing key 1 w/ a hold behavior and also press another key 2
 	before the hold-behavior threshold, the hold binding is activated on key 1 instead of the tap. I want to
 	interrupt a hold to process the tap behavior.
-
-	Num & Scroll Lock; not present
-	Layer Tap Toggle to gaming bindings
-	Insert toggle not present
 */
 
-/* Keyboard Overlay Presentation Requirements
-    Combos (label + background at pos, w/ connecting lines to bound keys)
+/* Supported Shortcuts
+	Ctrl+A (select all)
+	Ctrl+C (copy)
+	Ctrl+X (cut)
+	Ctrl+V (paste)
+	Ctrl+Z (undo)
+	Ctrl+T (tab)
+	Ctrl+S (save)
+	Ctrl+D (duplicate or diff)
+	Ctrl+B (Build)
+	Ctrl+F & Ctrl+Shift+F (find)
+	Ctrl+Shift+[letter]
+
+	Ctrl+Shift+Arrow (nav layer; both thumbs hold)
+*/
+
+/* Omitted Bindings
+	Insert
+	Num & Scroll Lock
 */
 
 // Aurora Sweep doesn't use backlight feature, instead all LEDs (under board and under each key) are individually accessible.
