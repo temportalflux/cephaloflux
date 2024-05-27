@@ -1,9 +1,9 @@
 default_profile "tesseract"
 profile "tesseract" {
-	size 700 300
+	size 700 380
 	scale 1.0
 	location {
-		monitor 1
+		monitor 2
 		anchor "BottomLeft"
 		offset 0 40
 	}
@@ -16,16 +16,6 @@ profile "surface" {
 		offset 0 90
 	}
 }
-/*
-bindings that are lowercase or non-numpad numerical are autoshifted when shift is held
-combos:
-	binding label + links
-	link is:
-		start (vec2 of [-1,1] indicating position on the rendered label)
-		end (switch label and [-1,1] vec2 indicating the endpoint)
-		a list of control points (vec2 in window space)
-Tab is Bootstrap "indent"
-*/
 layout {
 	default_layer "alpha"
 
@@ -65,7 +55,60 @@ layout {
 	switch "pinky2.R"  310.0  -20.0 side="right"
 	switch "pinky3.R"  310.0  -80.0 side="right"
 
+	combo "meta" -70.0 -160.0 (IconBootstrap)"windows" {
+		link {
+			switch "thumbB.L" 0.0 1.0
+			point (+)-97.0 (-)-163.0 (Y)6.0 // corner is at <-97, -163>, with control points at <-94, -163> and <-97, -160>
+			anchor -1.0 0.0
+		}
+		link {
+			anchor 1.0 0.0
+			point (-)-37.0 (-)-163.0 (X)6.0 // corner is at <-37, -163>, with control points at <-40, -163> and <-37, -160>
+			switch "thumbA.L" 0.0 1.0
+		}
+	}
+	combo "capsword" 0.0 10.0 (IconBootstrap)"capslock" {
+		layers "alpha"
+		link {
+			switch "indexA2.L" 1.0 0.0
+			anchor -1.0 0.0
+		}
+		link {
+			switch "indexA2.R" -1.0 0.0
+			anchor 1.0 0.0
+		}
+	}
+	combo "capslock" 0.0 70.0 (IconBootstrap)"capslock-fill" {
+		layers "alpha"
+		link {
+			switch "indexA1.L" 1.0 0.0
+			anchor -1.0 0.0
+		}
+		link {
+			switch "indexA1.R" -1.0 0.0
+			anchor 1.0 0.0
+		}
+	}
+	combo "layer_system" 0.0 150.0 "SYS" {
+		layers "alpha"
+		link {
+			switch "pinky1.L" 0.0 -1.0
+			point (+)-307.0 (+)150.0 (Y)6.0
+			anchor -1.0 0.0
+		}
+		link {
+			switch "pinky1.R" 0.0 -1.0
+			point (-)312.0 (+)150.0 (Y)6.0
+			anchor 1.0 0.0
+		}
+		bind "F24" layer="sys"
+	}
+
 	layer "alpha" {
+		bind-todo "thumbA.L" "ModTap" {
+			tap "Space" (IconCustom)"space"
+			hold (Layer)"F22" "symbol" "SYM"
+		}
 		bind "thumbA.L" {
 			slot "Tap" "Space" (IconCustom)"space"
 			slot "Hold" "F22" "SYM" layer="symbol"
@@ -121,6 +164,7 @@ layout {
 		}
 		bind "pinky2.L"  {
 			slot "Tap" "A"
+			slot "Hold" "Tab" (IconBootstrap)"indent"
 		}
 		bind "pinky3.L"  {
 			slot "Tap" "Z"
@@ -385,7 +429,9 @@ layout {
 		//bind "middle2.L"
 		bind "middle3.L"
 		bind "ring1.L"
-		bind "ring2.L"
+		bind "ring2.L" {
+			slot "Tap" "LMeta" (IconBootstrap)"windows"
+		}
 		bind "ring3.L"
 		bind "pinky1.L"
 		bind "pinky2.L"
@@ -428,7 +474,51 @@ layout {
 		bind "pinky3.R"
 	}
 	layer "sys" {
+		bind "thumbA.L"
+		bind "thumbB.L"
+		bind "indexA1.L"
+		bind "indexA2.L"
+		bind "indexA3.L"
+		bind "indexB1.L"
+		bind "indexB2.L"
+		bind "indexB3.L"
+		bind "middle1.L" // bluetooth clear
+		bind "middle2.L"
+		bind "middle3.L"
+		bind "ring1.L"
+		bind "ring2.L"
+		bind "ring3.L"
+		bind "pinky1.L"
+		bind "pinky2.L" {
+			slot "Tap" "_" "bootloader"
+		}
+		bind "pinky3.L" {
+			slot "Tap" "_" "reset"
+		}
 
+		bind "thumbA.R"
+		bind "thumbB.R" {
+			slot "Tap" "Escape" (IconBootstrap)"escape"
+		}
+		bind "indexA1.R" // RGB toggle
+		bind "indexA2.R"
+		bind "indexA3.R"
+		bind "indexB1.R"
+		bind "indexB2.R"
+		bind "indexB3.R"
+		bind "middle1.R"
+		bind "middle2.R"
+		bind "middle3.R"
+		bind "ring1.R"
+		bind "ring2.R"
+		bind "ring3.R"
+		bind "pinky1.R"
+		bind "pinky2.R" {
+			slot "Tap" "_" "bootloader"
+		}
+		bind "pinky3.R" {
+			slot "Tap" "_" "reset"
+		}
 	}
 	layer "game1" {
 

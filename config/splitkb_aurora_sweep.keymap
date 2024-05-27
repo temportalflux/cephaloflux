@@ -67,15 +67,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
 // Phonty https://www.reddit.com/r/ErgoMechKeyboards/comments/sbbgxp/pnohty_12_update/
 // Chordic https://www.reddit.com/r/crkbd/comments/us6ucr/chordic_keyboard_layout_for_the_cornecrkbd/
 // Getreuer Symbols https://getreuer.info/posts/keyboards/symbol-layer/index.html
-
-#define DEFAULT 0
-#define ALPHA 0
-#define NUM 1
-#define SYM 2
-#define NAV 3
-#define SYS 4
-#define GAME1 5
-#define GAME2 6
+// https://www.reddit.com/r/ErgoMechKeyboards/comments/1ctqurf/new_programming_layout_thoughts/
 
 /* NOTES:
 	change default behavior; currently if I start pressing key 1 w/ a hold behavior and also press another key 2
@@ -104,6 +96,62 @@ Behaviors (https://zmk.dev/docs/behaviors)
 	Num & Scroll Lock
 */
 
+/* LAYOUT
+//╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
+			00:pinky1.L      01:ring1.L      02:middle1.L    03:indexB1.L     04:indexA1.L       05:indexA1.R     06:indexB1.R     07:middle1.R      08:ring1.R      09:pinky1.R
+//┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+			10:pinky2.L      11:ring2.L      12:middle2.L    13:indexB2.L     14:indexA2.L       15:indexA2.R     16:indexB2.R     17:middle2.R      18:ring2.R      19:pinky2.R
+//┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+			20:pinky3.L      21:ring3.L      22:middle3.L    23:indexB3.L     24:indexA3.L       25:indexA3.R     26:indexB3.R     27:middle3.R      28:ring3.R      29:pinky3.R
+//┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
+																												30:thumbB.L      31:thumbA.L        32:thumbA.R      33:thumbB.R
+//┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚
+*/
+
+#define DEFAULT 0
+#define ALPHA 0
+#define NUM 1
+#define SYM 2
+#define NAV 3
+#define SYS 4
+#define GAME1 5 // NOTE: max F24
+#define GAME2 6 // NOTE: max F24
+
+#define pinky1L 0
+#define ring1L 1
+#define middle1L 2
+#define indexB1L 3
+#define indexA1L 4
+#define indexA1R 5
+#define indexB1R 6
+#define middle1R 7
+#define ring1R 8
+#define pinky1R 9
+#define pinky2L 10
+#define ring2L 11
+#define middle2L 12
+#define indexB2L 13
+#define indexA2L 14
+#define indexA2R 15
+#define indexB2R 16
+#define middle2R 17
+#define ring2R 18
+#define pinky2R 19
+#define pinky3L 20
+#define ring3L 21
+#define middle3L 22
+#define indexB3L 23
+#define indexA3L 24
+#define indexA3R 25
+#define indexB3R 26
+#define middle3R 27
+#define ring3R 28
+#define pinky3R 29
+#define thumbBL 30
+#define thumbAL 31
+#define thumbAR 32
+#define thumbBR 33
+
 // Aurora Sweep doesn't use backlight feature, instead all LEDs (under board and under each key) are individually accessible.
 // There are 6 under the board and 17 under-keys (this is per side).
 &led_strip {
@@ -115,17 +163,6 @@ Behaviors (https://zmk.dev/docs/behaviors)
         zmk,underglow = &led_strip;
     };
 
-    /* LAYOUT
-    //╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
-          00:pinky1.L      01:ring1.L      02:middle1.L    03:indexB1.L     04:indexA1.L       05:indexA1.R     06:indexB1.R     07:middle1.R      08:ring1.R      09:pinky1.R
-    //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
-          10:pinky2.L      11:ring2.L      12:middle2.L    13:indexB2.L     14:indexA2.L       15:indexA2.R     16:indexB2.R     17:middle2.R      18:ring2.R      19:pinky2.R
-    //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
-          20:pinky3.L      21:ring3.L      22:middle3.L    23:indexB3.L     24:indexA3.L       25:indexA3.R     26:indexB3.R     27:middle3.R      28:ring3.R      29:pinky3.R
-    //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
-                                                           30:thumbB.L      31:thumbA.L        32:thumbA.R      33:thumbB.R
-    //┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚
-    */
     macros {
         lhf21: layer_hold_f21 {
             compatible = "zmk,behavior-macro-two-param";
@@ -191,42 +228,32 @@ Behaviors (https://zmk.dev/docs/behaviors)
     combos {
         compatible = "zmk,combos";
 
-        combo_tab {
-            timeout-ms = <50>;
-            key-positions = <1 2>; // ring1.L + middle1.L
-            bindings = <&kp TAB>;
-        };
-
-        combo_lctrl {
-            timeout-ms = <50>;
-            key-positions = <21 22>; // ring3.L + middle3.L
-            bindings = <&kp LCTRL>;
-        };
-
-        combo_ralt {
-            timeout-ms = <50>;
-            key-positions = <27 28>; // middle3.R + ring3.R
-            bindings = <&kp RALT>;
-        };
-
         combo_win {
             timeout-ms = <50>;
-            key-positions = <31 30>; // thumbA.L + thumbB.L
+            key-positions = <thumbAL thumbBL>;
             bindings = <&kp LWIN>;
         };
 
         combo_capslock {
             timeout-ms = <50>;
             layers = <ALPHA>;
-            key-positions = <4 5>; // indexA1.L + indexA1.R
+            key-positions = <indexA1L indexA1R>;
             bindings = <&kp CAPS>;
         };
 
         combo_capsword {
             timeout-ms = <50>;
             layers = <ALPHA>;
-            key-positions = <14 15>; // indexA2.L + indexA@.R
+            key-positions = <indexA2L indexA2R>;
             bindings = <&caps_word>;
+        };
+
+				// Entering SYS layer using sticky (exit after 1 key press)
+        combo_layer_sys {
+            timeout-ms = <50>;
+            layers = <ALPHA>;
+            key-positions = <pinky1L pinky1R>;
+            bindings = <&sl SYS>;
         };
     };
 
@@ -239,7 +266,7 @@ Behaviors (https://zmk.dev/docs/behaviors)
         //╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
             &kp Q           &kp W            &kp F            &kp P            &kp B             &kp J            &mt SEMI L       &kp U            &kp Y            &none
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
-            &kp A           &mt LCTRL R      &ltf23 NAV S     &mt LSHFT T      &kp G             &mt DOT M        &mt RSHFT N      &mt UNDER E      &kp I            &kp O
+            &mt TAB A       &mt LCTRL R      &ltf23 NAV S     &mt LSHFT T      &kp G             &mt DOT M        &mt RSHFT N      &mt UNDER E      &kp I            &kp O
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
             &kp Z           &mt LC(X) X      &mt LC(C) C      &kp D            &mt LC(V) V       &mt COLON K      &kp H            &kp COMMA        &none            &none
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
@@ -282,11 +309,11 @@ Behaviors (https://zmk.dev/docs/behaviors)
         nav_layer {
             bindings = <
         //╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
-            &bt BT_CLR      &none            &none            &kp C_NEXT       &kp C_VOL_UP      &kp PSCRN        &none            &mt PG_UP UP     &none            &rgb_ug RGB_TOG
+            &none           &none            &none            &kp C_NEXT       &kp C_VOL_UP      &kp PSCRN        &none            &mt PG_UP UP     &none            &none
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
-            &bootloader	    &none            &trans           &kp C_PLAY_PAUSE &kp C_MUTE        &kp PAUSE_BREAK  &mt HOME LEFT    &mt PG_DN DOWN   &mt END RIGHT    &bootloader
+            &none	          &kp LEFT_META    &trans           &kp C_PLAY_PAUSE &kp C_MUTE        &kp PAUSE_BREAK  &mt HOME LEFT    &mt PG_DN DOWN   &mt END RIGHT    &none
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
-            &sys_reset      &none            &none            &kp C_PREV       &kp C_VOL_DN      &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &none            &none            &sys_reset
+            &none           &none            &none            &kp C_PREV       &kp C_VOL_DN      &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &none            &none            &none
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
                                                               &none            &kp LSHIFT        &kp RCTRL        &none
         //┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚
@@ -297,13 +324,13 @@ Behaviors (https://zmk.dev/docs/behaviors)
         sys_layer {
             bindings = <
         //╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮╭───────────────┰───────────────┰───────────────┰───────────────┰───────────────╮
-            &none           &none            &none            &none            &none             &none            &none            &none            &none            &none
+            &none           &none            &bt BT_CLR       &none            &none             &rgb_ug RGB_TOG  &none            &none            &none            &none
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
-            &none           &none            &none            &none            &none             &none            &none            &none            &none            &none
+            &bootloader     &none            &none            &none            &none             &none            &none            &none            &none            &bootloader   
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
-            &none           &none            &none            &none            &none             &none            &none            &none            &none            &none
+            &sys_reset      &none            &none            &none            &none             &none            &none            &none            &none            &sys_reset    
         //┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨┠───────────────╂───────────────╂───────────────╂───────────────╂───────────────┨
-                                                              &none            &none             &none            &none
+                                                              &none            &none             &none            &kp ESC
         //┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚┖───────────────┸───────────────┸───────────────┸───────────────┸───────────────┚
             >;
         };
