@@ -66,6 +66,7 @@ layout {
 			point (-)-37.0 (-)-163.0 (X)6.0 // corner is at <-37, -163>, with control points at <-40, -163> and <-37, -160>
 			switch "thumbA.L" 0.0 1.0
 		}
+		bind "LMeta"
 	}
 	combo "capsword" 0.0 10.0 (IconBootstrap)"capslock" {
 		layers "alpha"
@@ -77,6 +78,7 @@ layout {
 			switch "indexA2.R" -1.0 0.0
 			anchor 1.0 0.0
 		}
+		bind "CapsLock"
 	}
 	combo "capslock" 0.0 70.0 (IconBootstrap)"capslock-fill" {
 		layers "alpha"
@@ -88,6 +90,7 @@ layout {
 			switch "indexA1.R" -1.0 0.0
 			anchor 1.0 0.0
 		}
+		bind "CapsLock"
 	}
 	combo "layer_system" 0.0 150.0 "SYS" {
 		layers "alpha"
