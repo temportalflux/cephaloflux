@@ -17,7 +17,7 @@ profile "surface" {
 	}
 }
 layout {
-	default_layer "alpha"
+	default_layer "qwerty"
 
 	switch "thumbA.L"   40.0 -110.0 side="left"
 	switch "thumbB.L"  100.0 -110.0 side="left"
@@ -104,14 +104,10 @@ layout {
 			point (-)312.0 (+)150.0 (Y)6.0
 			anchor 1.0 0.0
 		}
-		bind "F24" layer="sys"
+		bind "F24" layer="sys" // sticky
 	}
 
 	layer "alpha" {
-		bind-todo "thumbA.L" "ModTap" {
-			tap "Space" (IconCustom)"space"
-			hold (Layer)"F22" "symbol" "SYM"
-		}
 		bind "thumbA.L" {
 			slot "Tap" "Space" (IconCustom)"space"
 			slot "Hold" "F22" "SYM" layer="symbol"
@@ -223,6 +219,122 @@ layout {
 		bind "pinky2.R" {
 			slot "Tap" "O"
 		}
+		bind "pinky3.R"
+	}
+	layer "qwerty" {
+		bind "thumbB.L" {
+			slot "Tap" "Backspace" (IconBootstrap)"backspace-fill"
+			slot "Hold" "Delete" "DEL"
+		}
+		bind "thumbA.L" {
+			slot "Tap" "Space" (IconCustom)"space"
+			slot "Hold" "F22" "SYM" layer="symbol"
+		}
+		bind "thumbA.R" {
+			slot "Tap" "Enter" (IconBootstrap)"arrow-return-left"
+			slot "Hold" "F21" "NUM" layer="number"
+		}
+		bind "thumbB.R" {
+			slot "Tap" "Escape" (IconBootstrap)"escape"
+		}
+
+		bind "pinky1.L" {
+			slot "Tap" "Q"
+		}
+		bind "ring1.L" {
+			slot "Tap" "W"
+		}
+		bind "middle1.L" {
+			slot "Tap" "E"
+		}
+		bind "indexB1.L" {
+			slot "Tap" "R"
+		}
+		bind "indexA1.L" {
+			slot "Tap" "T"
+		}
+		bind "indexA1.R" {
+			slot "Tap" "Y"
+		}
+		bind "indexB1.R" {
+			slot "Tap" "U"
+			slot "Hold" ";"
+		}
+		bind "middle1.R" {
+			slot "Tap" "I"
+		}
+		bind "ring1.R" {
+			slot "Tap" "P"
+		}
+		bind "pinky1.R"
+
+		bind "pinky2.L"  {
+			slot "Tap" "A"
+			slot "Hold" "Tab" (IconBootstrap)"indent"
+		}
+		bind "ring2.L" {
+			slot "Tap" "S"
+			slot "Hold" "LControl" (IconBootstrap)"command"
+		}
+		bind "middle2.L" {
+			slot "Tap" "D"
+			slot "Hold" "F23" "NAV" layer="nav"
+		}
+		bind "indexB2.L" {
+			slot "Tap" "F"
+			slot "Hold" "LShift" (IconBootstrap)"shift-fill"
+		}
+		bind "indexA2.L" {
+			slot "Tap" "G"
+		}
+		bind "indexA2.R" {
+			slot "Tap" "H"
+			slot "Hold" "."
+		}
+		bind "indexB2.R" {
+			slot "Tap" "J"
+			slot "Hold" "RShift" (IconBootstrap)"shift-fill"
+		}
+		bind "middle2.R" {
+			slot "Tap" "K"
+			slot "Hold" "_"
+		}
+		bind "ring2.R" {
+			slot "Tap" "L"
+		}
+		bind "pinky2.R" {
+			slot "Tap" "O"
+		}
+
+		bind "pinky3.L"  {
+			slot "Tap" "Z"
+		}
+		bind "ring3.L" {
+			slot "Tap" "X"
+			slot "Hold" "LControl+X" "cut"
+		}
+		bind "middle3.L" {
+			slot "Tap" "C"
+			slot "Hold" "LControl+C" "copy"
+		}
+		bind "indexB3.L" {
+			slot "Tap" "V"
+		}
+		bind "indexA3.L" {
+			slot "Tap" "B"
+			slot "Hold" "LControl+V" "paste"
+		}
+		bind "indexA3.R" {
+			slot "Tap" "N"
+			slot "Hold" ":"
+		}
+		bind "indexB3.R" {
+			slot "Tap" "M"
+		}
+		bind "middle3.R" {
+			slot "Tap" ","
+		}
+		bind "ring3.R"
 		bind "pinky3.R"
 	}
 	layer "number" {

@@ -21,6 +21,7 @@ int handle_keycode_event(const zmk_event_t *eh) {
 	//return ZMK_BEHAVIOR_OPAQUE; // to consume
 }
 
+// may want `zmk_position_state_changed`, its unclear if position or keycode represents a switch vs a key a switch is mapped to
 ZMK_LISTENER(cephaloflux_keycode_handler, handle_keycode_event);
 ZMK_SUBSCRIPTION(cephaloflux_keycode_handler, zmk_keycode_state_changed);
 
